@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enliner — Your calls. Your Mac. No subscription.</title>
+  <meta name="description" content="A private, on-device AI notetaker for the Mac. It records, transcribes, and summarizes your calls entirely on your machine — buy it once, keep it forever. No cloud. No account. No monthly fee." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Enliner — Your calls. Your Mac. No subscription." />
+  <meta property="og:description" content="Private, on-device AI call notes for the Mac. Record, transcribe, and summarize entirely on your machine. Buy once, keep forever." />
+  <meta property="og:url" content="https://enliner.jp" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ─────────────────────────────  BACKGROUND  ───────────────────────────── -->
+  <!-- Layered, parallaxing line-art. Purely decorative; monochrome; aria-hidden. -->
+  <div class="bg" aria-hidden="true">
+    <svg class="bg-layer" data-depth="0.12" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="contours" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M-40 220 C 260 120, 520 300, 760 220 S 1240 120, 1500 240" />
+        <path d="M-40 300 C 260 200, 520 380, 760 300 S 1240 200, 1500 320" />
+        <path d="M-40 380 C 260 280, 520 460, 760 380 S 1240 280, 1500 400" />
+        <path d="M-40 460 C 260 360, 520 540, 760 460 S 1240 360, 1500 480" />
+        <path d="M-40 540 C 260 440, 520 620, 760 540 S 1240 440, 1500 560" />
+      </g>
+    </svg>
+    <svg class="bg-layer" data-depth="0.30" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- an outliner/graph echo: nodes joined by hairlines -->
+      <g class="nodes" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <line x1="220" y1="900" x2="520" y2="760" />
+        <line x1="520" y1="760" x2="880" y2="880" />
+        <line x1="880" y1="880" x2="1180" y2="720" />
+        <line x1="520" y1="760" x2="560" y2="1120" />
+        <line x1="880" y1="880" x2="980" y2="1240" />
+      </g>
+      <g class="dots" fill="currentColor">
+        <circle cx="220" cy="900" r="3" /><circle cx="520" cy="760" r="3" />
+        <circle cx="880" cy="880" r="3" /><circle cx="1180" cy="720" r="3" />
+        <circle cx="560" cy="1120" r="3" /><circle cx="980" cy="1240" r="3" />
+      </g>
+    </svg>
+    <div class="bg-grain"></div>
+  </div>
+
+  <!-- ─────────────────────────────  NAV  ───────────────────────────── -->
+  <header class="nav">
+    <a class="wordmark" href="#top" aria-label="Enliner home">
+      <span class="wordmark-glyph">◐</span> Enliner
+    </a>
+    <nav class="nav-links">
+      <a href="#pillars">Why</a>
+      <a href="#price">Price</a>
+      <a href="#essay">The idea</a>
+      <a class="nav-cta" href="#access">Early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ─────────────────────────────  HERO  ───────────────────────────── -->
+    <section class="hero" id="hero">
+      <div class="hero-inner reveal">
+        <p class="kicker">Private, on-device AI call notes for the Mac</p>
+        <h1 class="hero-title">
+          Your calls.<br />Your Mac.<br /><em>No subscription.</em>
+        </h1>
+        <p class="hero-sub">
+          Enliner records, transcribes, and summarizes your calls entirely on your
+          machine. Buy it once, keep it forever — no cloud, no account, no monthly fee.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#access">Get early access</a>
+          <a class="btn btn-ghost" href="#essay">Read the idea ↓</a>
+        </div>
+        <p class="hero-note">Built in the open · Not on sale yet · macOS 14+</p>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- ─────────────────────────────  PILLARS  ───────────────────────────── -->
+    <section class="pillars" id="pillars">
+      <ol class="pillar-list">
+        <li class="pillar reveal">
+          <span class="pillar-num">01</span>
+          <h2>Private by construction<br /><span class="pillar-not">not by policy</span></h2>
+          <p>
+            Recording, transcription, diarization, and summarization all run on-device.
+            There is no server that <em>can</em> see your conversation — privacy isn't a
+            setting or a promise, it's the architecture. Works fully offline. On a plane.
+            No account required.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">02</span>
+          <h2>Buy it once<br /><span class="pillar-not">yours forever</span></h2>
+          <p>
+            One price — not a meter. Keep the app forever; stop paying and nothing is
+            taken away. Your notes are plain files you can still open in ten years, with
+            no app installed and no company left to ask.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">03</span>
+          <h2>Opinionated<br /><span class="pillar-not">and good at the job</span></h2>
+          <p>
+            Not a kitchen sink. It records your call, gives you a clean transcript and a
+            usable summary, and drops it into a real outliner you can actually think in —
+            with a graph view to connect it to everything else. Then it gets out of the way.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ─────────────────────────────  PRICE ANCHOR  ───────────────────────────── -->
+    <section class="price" id="price">
+      <div class="price-inner reveal">
+        <p class="section-kicker">The math sells itself</p>
+        <h2 class="price-head">Own your notes.<br />Don't rent them.</h2>
+        <div class="price-compare">
+          <div class="price-card price-us">
+            <p class="price-name">Enliner</p>
+            <p class="price-big">$79<span>once</span></p>
+            <p class="price-detail">
+              Optional $39/yr, only if you want newer builds. Over three years:
+              <strong>≤ $157</strong> — and it's yours, offline, forever.
+            </p>
+          </div>
+          <div class="price-versus" aria-hidden="true">vs</div>
+          <div class="price-card price-them">
+            <p class="price-name">Cloud notetakers</p>
+            <p class="price-big">$216<span>/ year, forever</span></p>
+            <p class="price-detail">
+              ~$648 over three years — that never stops — with your conversations living
+              on someone else's server.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────  ESSAY  ───────────────────────────── -->
+    <section class="essay-wrap" id="essay">
+      <div class="essay-intro reveal">
+        <p class="section-kicker">The idea behind it</p>
+        <h2 class="essay-title">When Code Is Free,<br />Only Conviction Is Scarce</h2>
+      </div>
+      <div class="essay reveal">
+        <section id="cold-open">
+          <h2>The call you don't put in the cloud</h2>
+          <blockquote>
+            <p>There is a kind of phone call you do not put in the cloud. The one under NDA. The one with your lawyer, your therapist, your board. The one where "don't worry, it's encrypted in transit" is not an answer, because the problem was never the transit — it's that the recording lands on a company's server, gets a retention policy, becomes an asset on someone else's balance sheet, and outlives your relationship with them.</p>
+            <p>For that call, every AI notetaker on the market is disqualified. Not too expensive, not too clunky — disqualified, structurally, because their business <em>is</em> the server that sees your conversation. Granola. Otter. Notion AI. You are the input to a machine you don't own.</p>
+            <p>So I built the opposite. A notetaker that records, transcribes, and summarizes entirely on your Mac, that you buy once instead of renting forever, whose files you could still open in ten years with no app installed and no company still alive to ask.</p>
+          </blockquote>
+          <p>Except "built" is the wrong word, and the right word is the whole point of this essay. I <em>described</em> it. The code — a real native Mac app, tens of thousands of lines of Swift, a custom text engine that beats its own latency budget — was written by AI agents, running a loop I set up and supervised. That fact is not an embarrassment I'm burying at the bottom. It's the argument.</p>
+        </section>
+
+        <section id="premise">
+          <h2>When code writes itself</h2>
+          <p>Here is the thing flat: the scarce, expensive input of the last forty years of software — skilled engineering time — is deflating fast, and most software businesses have never priced that in. Their whole shape assumes that writing good code is hard, slow, and dear. Increasingly it is none of those.</p>
+          <p>I want to hand you receipts instead of a claim, because "AI built it" usually means a toy that demos well and falls over on contact with reality. Enliner is not that. It's a native Swift 6 app where your notes are canonical as plain Markdown on disk, indexed at runtime by SQLite, edited through a <em>custom</em> Core Text engine written from scratch — and it was produced through a supervised agent loop: design, code, review by a different agent, fix, verify, one sub-task per commit. The rigor isn't decoration. It's what makes AI-built code trustworthy, and it was cheap.</p>
+          <p>Let the numbers do the arguing. It cold-opens a ten-thousand-block vault in about 838 milliseconds, against a budget of 1.5 seconds. Keystroke-to-glyph latency comes in at a p95 of 8.78 milliseconds, against a one-frame budget of 16. The model layer alone carries 223 tests. There is a dated decision log recording every non-obvious choice. This is not vibecoded slop that happens to compile — the measured discipline is the point, and I did not pay for it in the old currency of engineering-hours.</p>
+          <p>Sit with that, because it dissolves the thing most software companies quietly assume is their moat. If I can conjure this in a spare month, so can the incumbent — and so can the next person, and the one after that. The "we have great engineers" defense is melting for the indie and the giant at the same time. Nobody's code is scarce anymore.</p>
+          <p>Which forces the question the rest of this essay answers: if the code isn't the moat, what is? Four things — and none of them come out of a compiler.</p>
+        </section>
+
+        <section id="map">
+          <h2>Four things a compiler can't make</h2>
+          <p>When anyone can produce the code, value migrates to what code cannot manufacture. Four scarcities: <strong>taste, distribution, trust, and opinionated vision.</strong> That's the whole map, and I'll walk each one wearing the app rather than defining it in the abstract — because a definition proves nothing and a shipped decision proves everything.</p>
+          <p>Note the recursion before it pays off, because it's the interesting part: the incumbents I'm aiming at are genuinely strong on exactly one of these four — distribution — and structurally weak on another — trust. That gap, between what they own and what they can't, is the entire opening. I'll start where cheap code hurts most: the sudden, dangerous freedom to build everything.</p>
+        </section>
+
+        <section id="taste">
+          <h2>Taste: the discipline of no</h2>
+          <p>When building is expensive, scope disciplines itself. You can't afford the feature, so you don't ship it, and the constraint does your editing for you. Take the cost away and that governor vanishes. When code is free, the only thing standing between a product and bloat is taste — and taste, in practice, is mostly the word <em>no</em>.</p>
+          <p>So Enliner's non-goals are refusals, not a backlog. No plugin API. No theme engine — one light mode, one dark, chosen and done. No iOS. No sync-as-identity. No query grammar beyond a frozen v1 set. No video or audio embeds. No Windows, no Linux. Anything that sneaks into a design discussion gets cut on sight, and the discipline is that these are decisions, not deferrals waiting for a rainy quarter.</p>
+          <p>The construction move underneath is to take exactly one thing from each rival and refuse the rest. The block-and-graph structure from Logseq — while refusing its plugin sprawl, its query language, its Electron heft. The native editing fluidity of Bike, which is the quality <em>bar</em> the editor is held to, not a feature to copy. The durability contract that made Obsidian trustworthy — while refusing the plugin platform that came with it. Every borrow is one primitive, deliberately, and everything around it is declined.</p>
+          <p>What makes this more than a mood is that the taste is testable. There's a one-frame pillar baked into the build: if an editor operation can't complete within a frame at ten thousand blocks, it doesn't ship on that path. That's why the keystroke number is 8.78 milliseconds and not "feels fast" — it's an opinion you can fail a build against. Most products can't fail a build against their taste, because their taste isn't specified anywhere.</p>
+          <p>And it's governed, not aspirational. The locked decisions run D0 through D27; a parking lot of deferred-with-intent ideas is kept strictly separate from the non-goals, because "not yet" and "never" are different promises and blurring them is how scope creep launders itself as roadmap. Anything not already in a spec needs a written entry before it lands. The refusals are enforced. Taste tells you what to build — but it says nothing about whether anyone should trust you with what you built.</p>
+        </section>
+
+        <section id="trust">
+          <h2>Trust: provable, not promised</h2>
+          <p>The AI era turns trust into the entire ballgame, because of what you're now handing software: your calls, your notes, the half-formed thinking you'd never say out loud to a stranger. Every cloud notetaker asks you to trust a promise — a privacy policy, a paragraph, an intention. Promises are exactly the thing a business model can quietly revise.</p>
+          <p>Enliner's trust is architectural instead. Record, transcribe, diarize, summarize — all of it runs on-device, on a local model via MLX and on-device transcription via WhisperKit. There is no server that <em>can</em> see your conversation, because there is no server in the loop at all. The difference between a privacy policy and a privacy architecture is that you can verify the second one yourself: turn on airplane mode, point Little Snitch at it, watch the network stay silent while the app keeps working. Privacy you can check with your own eyes is a different category of claim than privacy you have to take on faith.</p>
+          <p>Then there's durability of reference, which is the promise I'd defend hardest. Link a page or paste an image, and the vault captures a local, self-contained copy. Ten years on, the whole thing opens as a folder — Markdown, images, single-file HTML — with no app, no server, no rot, no dead link back to a service that folded. Your record of a conversation shouldn't depend on a company still being alive to serve it.</p>
+          <p>That instinct is compiled into a test called S7: the vault survives app uninstall, readable as plain <code>.md</code> plus assets, with no app present. It's the file a stranger can read. Hold that against lock-in, whose entire engineering purpose is the opposite — to make leaving <em>cost</em> you. One of these is designed so you can walk away clean; the other is designed so you can't.</p>
+          <p>There is no telemetry. No analytics. No crash-reporting service phoning home. Full stop — not a setting you can toggle, an absence. The incumbents can't match this, and it's worth being precise about why: their business model <em>is</em> the cloud that sees everything. Asking Granola or Otter to be private by construction isn't asking for a feature. It's asking them to stop existing in their current form.</p>
+          <p>The fair objection, met head-on: if it's this private, why isn't it open source? Because the privacy here is verifiable behavior, not source-dependent faith — airplane mode proves it whether or not you ever read a line of Swift. And a focused commercial app can be supported and sustained without renting you a subscription or monetizing your data. Closed source and private-by-architecture are not in tension; the notetakers that <em>are</em> open about their code still ship your call to a server. Source availability was never the thing keeping your conversation on your machine.</p>
+          <p>Provable trust, though, is worthless if it never reaches the person who needs it. Which turns out to be the hard part — and the one place the incumbents genuinely win.</p>
+        </section>
+
+        <section id="distribution">
+          <h2>Distribution: the one thing the incumbents are actually better at</h2>
+          <p>Let me concede this plainly, because a piece that pretended otherwise wouldn't be worth reading. Distribution is the pillar that VC money actually buys, and it's the one the incumbents dominate outright. When code is free, reaching the person who feels the pain becomes the genuinely scarce channel — and it's a design problem you solve up front, not a marketing afterthought you bolt on at launch.</p>
+          <p>Focus is itself a distribution asset, so there is one enemy, named: the cloud AI-notetaker subscription, Granola first. Two structural weaknesses to attack, both of which you already know from the top of this essay — your conversations live on their servers, and you rent the tool forever at roughly $216 a year that never stops. A single, sharp diff beats a feature list, and that diff is the whole pitch.</p>
+          <p>The beachhead is the strategy, not a demographic slide. The first users are the NDA- and privilege-bound professionals — therapists, lawyers, doctors, consultants, journalists — for whom cloud call-recording isn't a preference to weigh but a thing that's forbidden or reckless. Highest intent, lowest price-sensitivity, and tight word-of-mouth networks where "finally, compliant call notes" travels on its own. Win the call-notes job first; the outliner and graph underneath are the <em>retention</em> story, never the acquisition headline, because nobody wakes up in the morning wanting a substrate.</p>
+          <p>Distribution is direct, not the App Store, and that's architectural rather than lazy: a notarized <code>.dmg</code>, Sparkle for auto-updates, Paddle as merchant of record so a solo maker doesn't drown in global VAT. The App Store is a named non-goal because it's structurally incompatible — Apple mandates StoreKit in-app purchase, which cannot coexist with the buy-once, no-subscription model. The distribution choice and the pricing model are literally the same decision, made once. And the channels where this story is pre-written — Show HN, Product Hunt, the privacy and Mac-indie press, the niche professional forums — reward exactly the coherence the rest of the app is built on.</p>
+          <p>Distribution decides who hears you. Pricing decides what you're actually saying.</p>
+        </section>
+
+        <section id="vision">
+          <h2>Opinionated vision: pricing is the thesis, compiled</h2>
+          <p>Vision stops being a mood board the moment it hits the price tag, because the price is where a thousand small convictions either line up or expose themselves as decoration. So here is the whole model, stated as the argument it is. $79, once: the current build, twelve months of updates, and a perpetual fallback — every build shipped inside that year is yours forever. $39 a year, optional, only if you want the <em>newer</em> builds after that. Stop paying and nothing is taken away. The app you have keeps being the app you have.</p>
+          <p>This has a lineage — the "updates as a product" model that JetBrains and Sublime have run for years: you buy a twelve-month update window and keep everything that landed inside it, permanently. It isn't novel. It's deliberately chosen, because the familiar shape is the honest one.</p>
+          <p>The purity beat is where it gets uncomfortable on purpose: renewal is a manual re-purchase. No card on file. Nothing to cancel, because there's nothing subscribed. "There is no subscription" is literally true here, not rhetorically true — and building it this way costs conversions, measurably, because friction always does. That cost is the entire point. The one billing pattern this audience is fleeing is the one pattern we refuse to build, even where building it would help the numbers.</p>
+          <p>The anchor is the whole play, and it's always shown next to Granola's roughly $216 a year, forever. $79 once comes to at most $157 over three years, against Granola's $648 over the same stretch — and yours is offline, and yours is forever. The rule underneath is "gate the app, not the notes": the only state that ever blocks you is a lapsed trial, and even that never touches your <code>.md</code> files. Your notes are never the hostage. The software is the thing with a price; the record of your own conversations is not.</p>
+          <p>Zoom out and the point isn't any single number — it's the coherence. Own versus rent. Device versus cloud. One-time versus forever. Gate the app, not the notes. Every small decision rhymes with every other one, and that rhyme is precisely the thing a feature-list clone cannot fake and cheap code makes newly decisive. When anyone can copy the features in a weekend, the only durable thing left is whether all your decisions point the same direction. Add these up and you're not describing a product decision. You're describing a politics.</p>
+        </section>
+
+        <section id="politics">
+          <h2>The politics: the rent is the product</h2>
+          <p>Steelman it first, because the target deserves a fair account. Cloud-SaaS-subscription was a rational model when software was both expensive to build <em>and</em> expensive to run. Recurring revenue funded genuine recurring cost — servers, engineers, the real ongoing bill of keeping a thing alive. The rent bought something. For a long time that was simply true.</p>
+          <p>Here's the hinge: both costs are now collapsing at once. Code is nearly free to write — the first half of this essay is the receipt — and inference increasingly runs on the user's own silicon, the second half's receipt. When the cost basis falls out from under the rent, the rent stops being a fee for a service and becomes something else. It becomes a subscription to your own data, hosted on hardware you already paid for. The extraction that used to be justified by real expense is now justified by nothing but habit and lock-in.</p>
+          <p>Name the mechanism without flinching: recurring billing, your data held as the thing you'd lose by leaving, lock-in deployed <em>as</em> the retention strategy rather than as a side effect. This isn't fraud and I won't call it that. It's a transfer that was once fair and is quietly ceasing to be, as the ground shifts under it.</p>
+          <p>And the exit is just the premise restated. Local-first plus buy-once is the concrete alternative — ownership over rent, device over cloud, one purchase over a meter that never stops — and it is now buildable by one person in a spare month <em>because</em> coding got cheap. That's the recursion closing: the same collapse in the cost of software that made the extraction indefensible is the collapse that made the alternative shippable. The thing that ends the rent is the thing that made the rent indefensible in the first place.</p>
+        </section>
+
+        <section id="caveats">
+          <h2>The honest caveats: what I'm not claiming</h2>
+          <p>Before you take any of this at face value, here's what I'm not claiming — because honesty <em>is</em> the trust pillar, and the fastest way to fail it is to demonstrate it on the product and abandon it in the essay.</p>
+          <p>It's a prototype, in the open. The core and the AI features are built and measured on real hardware — the numbers above are real numbers. But release engineering, signing and notarization and the Sparkle update path, a landing page, and the actual <em>sale</em> don't fully exist yet. It is not on shelves. Saying that out loud is the trust argument applied to my own writing rather than only to the app.</p>
+          <p>The AI-built disclosure cuts both ways, and I'd rather name the reflex than wait for it: "AI slop." Fair concern. The answer is that the test counts, the perf budgets, and the separate-reviewer discipline exist <em>because</em> AI-authored code demands more verification, not less. Cheap to write raises the bar on proof — it doesn't lower it. The rigor is a response to exactly the objection, not a distraction from it.</p>
+          <p>And the ceiling is chosen on purpose. This is the local-first, zero-VC, deliberately-capped indie game — Obsidian's game, roughly $25M in revenue with around seven people — not the Granola unicorn game. That's a feature if you own it out loud and only a disappointment if you were secretly hoping for the rocket. I wasn't. The whole argument only works if I actually mean the small, durable version of it.</p>
+          <p>The last one is the clock I'm racing, and I won't pretend it away: on-device summaries are "good enough, and yours," not parity with a cloud frontier model. That gap is real. If it widens faster than privacy and ownership retain people, the thesis comes under genuine pressure. I'm betting the two scarce things — your conversation staying on your machine, and never paying rent for it — hold their value against a slowly narrowing quality gap. That's a bet, stated as one.</p>
+        </section>
+
+        <section id="close">
+          <h2>The call that stays on your Mac</h2>
+          <p>So return to the call at the top — the one under NDA, the one you'd never hand to a server. Recorded. Transcribed. Summarized. And still sitting on your machine, openable in ten years, with no company's permission required and no company necessarily still around to give it. The record of the conversation is yours in the only sense that survives contact with a shutdown, an acquisition, or a changed policy: it's a file on your disk.</p>
+          <p>Compress the thesis to the one line worth keeping: the code got free; taste, distribution, trust, and vision didn't. That gap is the entire opportunity — for anyone willing to hold an opinion and refuse the rest of the roadmap that cheap code makes so tempting to build. Enliner is that argument compiled into something you can run.</p>
+          <p>It's built in the open, not on sale. Follow along, or ask for early access. When code is free, conviction is the only thing left worth selling — so I'd rather sell it to you once than rent it to you forever.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────  EARLY ACCESS  ───────────────────────────── -->
+    <section class="access" id="access">
+      <div class="access-inner reveal">
+        <p class="section-kicker">Built in the open</p>
+        <h2 class="access-head">Follow the build.<br />Get early access.</h2>
+        <p class="access-sub">
+          Enliner isn't on sale yet. Leave your email and you'll be first to know when
+          the private build goes out — no spam, no list-selling, unsubscribe anytime.
+        </p>
+        <form class="access-form" id="access-form"
+              method="POST"
+              action="https://formspree.io/f/REPLACE_WITH_FORM_ID"
+              data-endpoint="https://formspree.io/f/REPLACE_WITH_FORM_ID">
+          <label class="visually-hidden" for="email">Email address</label>
+          <input id="email" name="email" type="email" required
+                 autocomplete="email" placeholder="you@example.com" />
+          <button type="submit">Get early access</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="access-fallback">
+          Prefer email? Write to <a href="mailto:hello@enliner.jp">hello@enliner.jp</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <span class="foot-mark">◐ Enliner</span>
+      <span class="foot-tag">Private, on-device AI call notes for the Mac.</span>
+      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
