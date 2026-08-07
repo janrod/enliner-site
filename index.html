@@ -19,6 +19,27 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- ── Enliner wordmark, defined once, referenced via <use>. fill=currentColor. ── -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="enliner-wordmark" viewBox="0 0 1568 170">
+      <g transform="matrix(1,0,0,1,-304.650591,-564.824219)" fill="currentColor" fill-rule="nonzero">
+        <path d="M304.651,734.453L319.299,564.824L380.237,564.824L365.588,734.453L304.651,734.453ZM321.35,582.402L322.815,564.824L516.467,564.824L515.002,582.402L321.35,582.402ZM309.631,734.453L311.096,716.875L503.576,716.875L502.112,734.453L309.631,734.453ZM316.662,652.422L318.127,634.844L507.092,634.844L505.627,652.422L316.662,652.422Z"/>
+        <path d="M539.026,734.453L553.674,564.824L614.612,564.824L599.963,734.453L539.026,734.453ZM697.229,734.453L711.877,564.824L772.815,564.824L758.166,734.453L697.229,734.453ZM697.229,734.453L567.737,564.824L614.612,564.824L744.104,734.453L697.229,734.453Z"/>
+        <path d="M799.182,734.453L813.83,564.824L874.768,564.824L860.119,734.453L799.182,734.453ZM804.162,734.453L805.627,716.875L998.108,716.875L996.643,734.453L804.162,734.453Z"/>
+        <path d="M1065.197,734.453L1079.846,564.824L1140.783,564.824L1126.135,734.453L1065.197,734.453ZM934.944,582.402L936.408,564.824L1133.342,564.824L1131.877,582.402L934.944,582.402ZM1072.053,734.453L1073.518,716.875L1120.451,716.875L1118.987,734.453L1072.053,734.453Z"/>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1185.022,734.453L1199.67,564.824L1260.608,564.824L1245.959,734.453L1185.022,734.453ZM1343.225,734.453L1357.873,564.824L1418.811,564.824L1404.162,734.453L1343.225,734.453ZM1343.225,734.453L1213.733,564.824L1260.608,564.824L1390.1,734.453L1343.225,734.453Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1445.178,734.453L1459.826,564.824L1520.764,564.824L1506.115,734.453L1445.178,734.453ZM1461.877,582.402L1463.342,564.824L1656.994,564.824L1655.529,582.402L1461.877,582.402ZM1450.158,734.453L1451.623,716.875L1644.104,716.875L1642.639,734.453L1450.158,734.453ZM1457.19,652.422L1458.654,634.844L1647.619,634.844L1646.154,652.422L1457.19,652.422Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1691.565,652.422L1693.029,634.844L1881.994,634.844L1880.529,652.422L1691.565,652.422ZM1679.553,734.453L1694.201,564.824L1755.139,564.824L1740.49,734.453L1679.553,734.453ZM1697.424,582.402L1698.889,564.824L1887.854,564.824L1886.389,582.402L1697.424,582.402ZM1823.694,652.422L1831.311,564.824L1892.248,564.824L1884.631,652.422L1823.694,652.422ZM1816.662,734.453L1787.951,638.945L1848.889,638.945L1877.6,734.453L1816.662,734.453Z"/>
+        </g>
+      </g>
+    </symbol>
+  </svg>
+
   <!-- ─────────────────────────────  BACKGROUND  ───────────────────────────── -->
   <!-- Layered, parallaxing line-art. Purely decorative; monochrome; aria-hidden. -->
   <div class="bg" aria-hidden="true">
@@ -52,7 +73,7 @@
   <!-- ─────────────────────────────  NAV  ───────────────────────────── -->
   <header class="nav">
     <a class="wordmark" href="#top" aria-label="Enliner home">
-      <span class="wordmark-glyph">◐</span> Enliner
+      <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
     </a>
     <nav class="nav-links">
       <a href="#pillars">Why</a>
@@ -151,8 +172,8 @@
         <p class="section-kicker">The idea behind it</p>
         <h2 class="essay-title">When Code Is Free,<br />Only Conviction Is Scarce</h2>
       </div>
-      <div class="essay reveal">
-        <section id="cold-open">
+      <div class="essay">
+        <section id="cold-open" class="reveal">
           <h2>The call you don't put in the cloud</h2>
           <blockquote>
             <p>There is a kind of phone call you do not put in the cloud. The one under NDA. The one with your lawyer, your therapist, your board. The one where "don't worry, it's encrypted in transit" is not an answer, because the problem was never the transit — it's that the recording lands on a company's server, gets a retention policy, becomes an asset on someone else's balance sheet, and outlives your relationship with them.</p>
@@ -162,7 +183,7 @@
           <p>Except "built" is the wrong word, and the right word is the whole point of this essay. I <em>described</em> it. The code — a real native Mac app, tens of thousands of lines of Swift, a custom text engine that beats its own latency budget — was written by AI agents, running a loop I set up and supervised. That fact is not an embarrassment I'm burying at the bottom. It's the argument.</p>
         </section>
 
-        <section id="premise">
+        <section id="premise" class="reveal">
           <h2>When code writes itself</h2>
           <p>Here is the thing flat: the scarce, expensive input of the last forty years of software — skilled engineering time — is deflating fast, and most software businesses have never priced that in. Their whole shape assumes that writing good code is hard, slow, and dear. Increasingly it is none of those.</p>
           <p>I want to hand you receipts instead of a claim, because "AI built it" usually means a toy that demos well and falls over on contact with reality. Enliner is not that. It's a native Swift 6 app where your notes are canonical as plain Markdown on disk, indexed at runtime by SQLite, edited through a <em>custom</em> Core Text engine written from scratch — and it was produced through a supervised agent loop: design, code, review by a different agent, fix, verify, one sub-task per commit. The rigor isn't decoration. It's what makes AI-built code trustworthy, and it was cheap.</p>
@@ -171,13 +192,13 @@
           <p>Which forces the question the rest of this essay answers: if the code isn't the moat, what is? Four things — and none of them come out of a compiler.</p>
         </section>
 
-        <section id="map">
+        <section id="map" class="reveal">
           <h2>Four things a compiler can't make</h2>
           <p>When anyone can produce the code, value migrates to what code cannot manufacture. Four scarcities: <strong>taste, distribution, trust, and opinionated vision.</strong> That's the whole map, and I'll walk each one wearing the app rather than defining it in the abstract — because a definition proves nothing and a shipped decision proves everything.</p>
           <p>Note the recursion before it pays off, because it's the interesting part: the incumbents I'm aiming at are genuinely strong on exactly one of these four — distribution — and structurally weak on another — trust. That gap, between what they own and what they can't, is the entire opening. I'll start where cheap code hurts most: the sudden, dangerous freedom to build everything.</p>
         </section>
 
-        <section id="taste">
+        <section id="taste" class="reveal">
           <h2>Taste: the discipline of no</h2>
           <p>When building is expensive, scope disciplines itself. You can't afford the feature, so you don't ship it, and the constraint does your editing for you. Take the cost away and that governor vanishes. When code is free, the only thing standing between a product and bloat is taste — and taste, in practice, is mostly the word <em>no</em>.</p>
           <p>So Enliner's non-goals are refusals, not a backlog. No plugin API. No theme engine — one light mode, one dark, chosen and done. No iOS. No sync-as-identity. No query grammar beyond a frozen v1 set. No video or audio embeds. No Windows, no Linux. Anything that sneaks into a design discussion gets cut on sight, and the discipline is that these are decisions, not deferrals waiting for a rainy quarter.</p>
@@ -186,7 +207,7 @@
           <p>And it's governed, not aspirational. The locked decisions run D0 through D27; a parking lot of deferred-with-intent ideas is kept strictly separate from the non-goals, because "not yet" and "never" are different promises and blurring them is how scope creep launders itself as roadmap. Anything not already in a spec needs a written entry before it lands. The refusals are enforced. Taste tells you what to build — but it says nothing about whether anyone should trust you with what you built.</p>
         </section>
 
-        <section id="trust">
+        <section id="trust" class="reveal">
           <h2>Trust: provable, not promised</h2>
           <p>The AI era turns trust into the entire ballgame, because of what you're now handing software: your calls, your notes, the half-formed thinking you'd never say out loud to a stranger. Every cloud notetaker asks you to trust a promise — a privacy policy, a paragraph, an intention. Promises are exactly the thing a business model can quietly revise.</p>
           <p>Enliner's trust is architectural instead. Record, transcribe, diarize, summarize — all of it runs on-device, on a local model via MLX and on-device transcription via WhisperKit. There is no server that <em>can</em> see your conversation, because there is no server in the loop at all. The difference between a privacy policy and a privacy architecture is that you can verify the second one yourself: turn on airplane mode, point Little Snitch at it, watch the network stay silent while the app keeps working. Privacy you can check with your own eyes is a different category of claim than privacy you have to take on faith.</p>
@@ -197,7 +218,7 @@
           <p>Provable trust, though, is worthless if it never reaches the person who needs it. Which turns out to be the hard part — and the one place the incumbents genuinely win.</p>
         </section>
 
-        <section id="distribution">
+        <section id="distribution" class="reveal">
           <h2>Distribution: the one thing the incumbents are actually better at</h2>
           <p>Let me concede this plainly, because a piece that pretended otherwise wouldn't be worth reading. Distribution is the pillar that VC money actually buys, and it's the one the incumbents dominate outright. When code is free, reaching the person who feels the pain becomes the genuinely scarce channel — and it's a design problem you solve up front, not a marketing afterthought you bolt on at launch.</p>
           <p>Focus is itself a distribution asset, so there is one enemy, named: the cloud AI-notetaker subscription, Granola first. Two structural weaknesses to attack, both of which you already know from the top of this essay — your conversations live on their servers, and you rent the tool forever at roughly $216 a year that never stops. A single, sharp diff beats a feature list, and that diff is the whole pitch.</p>
@@ -206,7 +227,7 @@
           <p>Distribution decides who hears you. Pricing decides what you're actually saying.</p>
         </section>
 
-        <section id="vision">
+        <section id="vision" class="reveal">
           <h2>Opinionated vision: pricing is the thesis, compiled</h2>
           <p>Vision stops being a mood board the moment it hits the price tag, because the price is where a thousand small convictions either line up or expose themselves as decoration. So here is the whole model, stated as the argument it is. $79, once: the current build, twelve months of updates, and a perpetual fallback — every build shipped inside that year is yours forever. $39 a year, optional, only if you want the <em>newer</em> builds after that. Stop paying and nothing is taken away. The app you have keeps being the app you have.</p>
           <p>This has a lineage — the "updates as a product" model that JetBrains and Sublime have run for years: you buy a twelve-month update window and keep everything that landed inside it, permanently. It isn't novel. It's deliberately chosen, because the familiar shape is the honest one.</p>
@@ -215,7 +236,7 @@
           <p>Zoom out and the point isn't any single number — it's the coherence. Own versus rent. Device versus cloud. One-time versus forever. Gate the app, not the notes. Every small decision rhymes with every other one, and that rhyme is precisely the thing a feature-list clone cannot fake and cheap code makes newly decisive. When anyone can copy the features in a weekend, the only durable thing left is whether all your decisions point the same direction. Add these up and you're not describing a product decision. You're describing a politics.</p>
         </section>
 
-        <section id="politics">
+        <section id="politics" class="reveal">
           <h2>The politics: the rent is the product</h2>
           <p>Steelman it first, because the target deserves a fair account. Cloud-SaaS-subscription was a rational model when software was both expensive to build <em>and</em> expensive to run. Recurring revenue funded genuine recurring cost — servers, engineers, the real ongoing bill of keeping a thing alive. The rent bought something. For a long time that was simply true.</p>
           <p>Here's the hinge: both costs are now collapsing at once. Code is nearly free to write — the first half of this essay is the receipt — and inference increasingly runs on the user's own silicon, the second half's receipt. When the cost basis falls out from under the rent, the rent stops being a fee for a service and becomes something else. It becomes a subscription to your own data, hosted on hardware you already paid for. The extraction that used to be justified by real expense is now justified by nothing but habit and lock-in.</p>
@@ -223,7 +244,7 @@
           <p>And the exit is just the premise restated. Local-first plus buy-once is the concrete alternative — ownership over rent, device over cloud, one purchase over a meter that never stops — and it is now buildable by one person in a spare month <em>because</em> coding got cheap. That's the recursion closing: the same collapse in the cost of software that made the extraction indefensible is the collapse that made the alternative shippable. The thing that ends the rent is the thing that made the rent indefensible in the first place.</p>
         </section>
 
-        <section id="caveats">
+        <section id="caveats" class="reveal">
           <h2>The honest caveats: what I'm not claiming</h2>
           <p>Before you take any of this at face value, here's what I'm not claiming — because honesty <em>is</em> the trust pillar, and the fastest way to fail it is to demonstrate it on the product and abandon it in the essay.</p>
           <p>It's a prototype, in the open. The core and the AI features are built and measured on real hardware — the numbers above are real numbers. But release engineering, signing and notarization and the Sparkle update path, a landing page, and the actual <em>sale</em> don't fully exist yet. It is not on shelves. Saying that out loud is the trust argument applied to my own writing rather than only to the app.</p>
@@ -232,7 +253,7 @@
           <p>The last one is the clock I'm racing, and I won't pretend it away: on-device summaries are "good enough, and yours," not parity with a cloud frontier model. That gap is real. If it widens faster than privacy and ownership retain people, the thesis comes under genuine pressure. I'm betting the two scarce things — your conversation staying on your machine, and never paying rent for it — hold their value against a slowly narrowing quality gap. That's a bet, stated as one.</p>
         </section>
 
-        <section id="close">
+        <section id="close" class="reveal">
           <h2>The call that stays on your Mac</h2>
           <p>So return to the call at the top — the one under NDA, the one you'd never hand to a server. Recorded. Transcribed. Summarized. And still sitting on your machine, openable in ten years, with no company's permission required and no company necessarily still around to give it. The record of the conversation is yours in the only sense that survives contact with a shutdown, an acquisition, or a changed policy: it's a file on your disk.</p>
           <p>Compress the thesis to the one line worth keeping: the code got free; taste, distribution, trust, and vision didn't. That gap is the entire opportunity — for anyone willing to hold an opinion and refuse the rest of the roadmap that cheap code makes so tempting to build. Enliner is that argument compiled into something you can run.</p>
@@ -270,7 +291,7 @@
   <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
   <footer class="foot">
     <div class="foot-inner">
-      <span class="foot-mark">◐ Enliner</span>
+      <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
       <span class="foot-tag">Private, on-device AI call notes for the Mac.</span>
       <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
     </div>
