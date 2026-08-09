@@ -232,11 +232,11 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 
 .essay { font-size: var(--step-1); }
 .essay > section { padding: 0; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
-.essay h2 {
+.essay h3 {
   font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em;
   font-size: var(--step-2); line-height: 1.08; margin: 0 0 1rem;
 }
-.essay section:first-child h2 { font-size: var(--step-3); }
+.essay section:first-child h3 { font-size: var(--step-3); }
 .essay p { margin-bottom: 1.15em; color: var(--ink); line-height: 1.68; }
 .essay p + p { text-indent: 0; }
 .essay em { font-style: italic; }
