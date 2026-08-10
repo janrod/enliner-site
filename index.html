@@ -79,6 +79,7 @@
       <a href="#pillars">Why</a>
       <a href="#price">Price</a>
       <a href="#essay">The idea</a>
+      <a href="tech.html">Tech</a>
       <a class="nav-cta" href="#access">Early access</a>
     </nav>
   </header>
@@ -137,6 +138,46 @@
           </p>
         </li>
       </ol>
+    </section>
+
+    <!-- ─────────────────────────────  COLLABORATION  ───────────────────────────── -->
+    <section class="collab" id="collab">
+      <div class="collab-inner reveal">
+        <p class="section-kicker">Collaboration</p>
+        <h2 class="collab-head">Share it without<br />giving it away.</h2>
+        <p class="collab-lead">
+          Enliner can go multiplayer, one vault at a time. Two people edit the same outline
+          live, edits made offline merge cleanly when you reconnect, and the vault stays plain
+          Markdown the whole time.
+        </p>
+        <div class="collab-grid">
+          <div class="collab-item">
+            <h3>Real-time, offline-first</h3>
+            <p>
+              A movable-tree CRDT (Loro) merges everyone's changes with no central authority
+              deciding who wins. Work on a plane, reconnect, and it reconciles on its own.
+            </p>
+          </div>
+          <div class="collab-item">
+            <h3>A relay you can run</h3>
+            <p>
+              Sync moves through a small relay written in Rust. It forwards sealed bytes and
+              never sees your text. Host it yourself on hardware you control, down to a
+              Raspberry Pi on your own network.
+            </p>
+          </div>
+          <div class="collab-item">
+            <h3>End-to-end encrypted</h3>
+            <p>
+              Everything on the wire is sealed to keys only the members hold. Even the relay
+              that carries your vault around cannot read a word of it.
+            </p>
+          </div>
+        </div>
+        <p class="collab-more">
+          The technical version lives on the <a href="tech.html#sync">tech page</a>.
+        </p>
+      </div>
     </section>
 
     <!-- ─────────────────────────────  PRICE ANCHOR  ───────────────────────────── -->

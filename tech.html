@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enliner – Under the hood</title>
+  <meta name="description" content="How Enliner is built: a from-scratch Core Text editor, a movable-tree CRDT, on-device AI, files-canonical Markdown, and a public decision log. The nerdy, detailed breakdown." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Enliner – Under the hood" />
+  <meta property="og:description" content="The technology behind Enliner: a from-scratch caret engine, Loro CRDT, on-device AI, and a browsable decision log." />
+  <meta property="og:url" content="https://enliner.jp/tech.html" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── Enliner wordmark, defined once, referenced via <use>. fill=currentColor. ── -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="enliner-wordmark" viewBox="0 0 1568 170">
+      <g transform="matrix(1,0,0,1,-304.650591,-564.824219)" fill="currentColor" fill-rule="nonzero">
+        <path d="M304.651,734.453L319.299,564.824L380.237,564.824L365.588,734.453L304.651,734.453ZM321.35,582.402L322.815,564.824L516.467,564.824L515.002,582.402L321.35,582.402ZM309.631,734.453L311.096,716.875L503.576,716.875L502.112,734.453L309.631,734.453ZM316.662,652.422L318.127,634.844L507.092,634.844L505.627,652.422L316.662,652.422Z"/>
+        <path d="M539.026,734.453L553.674,564.824L614.612,564.824L599.963,734.453L539.026,734.453ZM697.229,734.453L711.877,564.824L772.815,564.824L758.166,734.453L697.229,734.453ZM697.229,734.453L567.737,564.824L614.612,564.824L744.104,734.453L697.229,734.453Z"/>
+        <path d="M799.182,734.453L813.83,564.824L874.768,564.824L860.119,734.453L799.182,734.453ZM804.162,734.453L805.627,716.875L998.108,716.875L996.643,734.453L804.162,734.453Z"/>
+        <path d="M1065.197,734.453L1079.846,564.824L1140.783,564.824L1126.135,734.453L1065.197,734.453ZM934.944,582.402L936.408,564.824L1133.342,564.824L1131.877,582.402L934.944,582.402ZM1072.053,734.453L1073.518,716.875L1120.451,716.875L1118.987,734.453L1072.053,734.453Z"/>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1185.022,734.453L1199.67,564.824L1260.608,564.824L1245.959,734.453L1185.022,734.453ZM1343.225,734.453L1357.873,564.824L1418.811,564.824L1404.162,734.453L1343.225,734.453ZM1343.225,734.453L1213.733,564.824L1260.608,564.824L1390.1,734.453L1343.225,734.453Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1445.178,734.453L1459.826,564.824L1520.764,564.824L1506.115,734.453L1445.178,734.453ZM1461.877,582.402L1463.342,564.824L1656.994,564.824L1655.529,582.402L1461.877,582.402ZM1450.158,734.453L1451.623,716.875L1644.104,716.875L1642.639,734.453L1450.158,734.453ZM1457.19,652.422L1458.654,634.844L1647.619,634.844L1646.154,652.422L1457.19,652.422Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1691.565,652.422L1693.029,634.844L1881.994,634.844L1880.529,652.422L1691.565,652.422ZM1679.553,734.453L1694.201,564.824L1755.139,564.824L1740.49,734.453L1679.553,734.453ZM1697.424,582.402L1698.889,564.824L1887.854,564.824L1886.389,582.402L1697.424,582.402ZM1823.694,652.422L1831.311,564.824L1892.248,564.824L1884.631,652.422L1823.694,652.422ZM1816.662,734.453L1787.951,638.945L1848.889,638.945L1877.6,734.453L1816.662,734.453Z"/>
+        </g>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ─────────────────────────────  BACKGROUND  ───────────────────────────── -->
+  <div class="bg" aria-hidden="true">
+    <svg class="bg-layer" data-depth="0.12" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="contours" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M-40 220 C 260 120, 520 300, 760 220 S 1240 120, 1500 240" />
+        <path d="M-40 300 C 260 200, 520 380, 760 300 S 1240 200, 1500 320" />
+        <path d="M-40 380 C 260 280, 520 460, 760 380 S 1240 280, 1500 400" />
+        <path d="M-40 460 C 260 360, 520 540, 760 460 S 1240 360, 1500 480" />
+      </g>
+    </svg>
+    <div class="bg-grain"></div>
+  </div>
+
+  <!-- ─────────────────────────────  NAV  ───────────────────────────── -->
+  <header class="nav">
+    <a class="wordmark" href="index.html" aria-label="Enliner home">
+      <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#price">Price</a>
+      <a href="#decisions" data-dz-open>Decisions</a>
+      <a class="nav-cta" href="index.html#access">Early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ── HEADER ── -->
+    <section class="tech-header" id="hero">
+      <div class="tech-inner reveal">
+        <p class="kicker">Under the hood</p>
+        <h1 class="tech-title">The technology behind Enliner</h1>
+        <p class="tech-lead">
+          Enliner is a native macOS app written in Swift 6. The model layer is a standalone
+          package that imports no UI framework. Your files stay canonical on disk as Markdown,
+          a SQLite index serves the runtime, and every edit writes both. Here is the detailed
+          version, subsystem by subsystem, with the numbers and the dependencies.
+        </p>
+        <div class="stat-strip">
+          <div class="stat"><div class="stat-num">7,149</div><div class="stat-label">automated tests, across 611 files</div></div>
+          <div class="stat"><div class="stat-num">≤ 16 ms</div><div class="stat-label">budget per keystroke, at 10,000 blocks</div></div>
+          <div class="stat"><div class="stat-num">0</div><div class="stat-label">servers, accounts, or telemetry</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">of the AI runs on your Mac</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 01 ARCHITECTURE ── -->
+    <section class="tech" id="architecture">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">01 · Architecture</p>
+        <h2>Three layers, one direction</h2>
+        <p class="tech-lead">The dependency arrow only ever points down: the SwiftUI app depends on the editor, the editor depends on the model, the model depends on nothing but the disk.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>The model is a standalone package <span class="tag">OutlineModel</span></h3>
+            <p><code>Outliner</code> (SwiftUI) → <code>OutlineEditor</code> → <code>OutlineModel</code> → disk. The model layer imports no AppKit and no SwiftUI, so the whole editing engine is testable with no UI running. That split is the reason there are thousands of headless tests.</p>
+          </div>
+          <div class="feat">
+            <h3>Files at rest, SQLite at runtime <span class="tag">invariant</span></h3>
+            <p>Your Markdown files are the source of truth on disk. A SQLite index is the source of truth while the app runs. Every edit writes both, and the index is fully rebuildable from the files. The index and other runtime state live outside the vault, in a device-local folder that never syncs.</p>
+          </div>
+          <div class="feat">
+            <h3>State lives behind an actor <span class="tag">Swift 6</span></h3>
+            <p>Model state sits behind an <code>actor&nbsp;Vault</code> under strict concurrency. The editor sends a <code>Command</code> and gets back an immutable <code>Diff</code>; reads happen against an immutable <code>Snapshot</code>. Indexing and file I/O stay off the main thread.</p>
+          </div>
+          <div class="feat">
+            <h3>Stable identity for every block <span class="tag">ULID</span></h3>
+            <p>Each block carries a 26-character Crockford base32 ULID, minted once and never rewritten. The generator is about forty hand-rolled lines with no dependency. Sibling order is a fractional key, so inserting between two blocks never renumbers the rest.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 02 EDITOR / CARET ── -->
+    <section class="tech tech-wrap-dark" id="editor">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">02 · The editor</p>
+        <h2>A caret engine, built from scratch</h2>
+        <p class="tech-lead">The editing surface does not use <code>NSTextView</code>. It is a custom Core Text engine, written to fix one specific defect: keeping the caret exactly where it belongs when the layout underneath it changes. Bike and TaskPaper left <code>NSTextView</code> for the same reason.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>The caret is anchored to the model <span class="tag">Core Text</span></h3>
+            <p>The caret is a <code>(BlockID, offset)</code> pair, never a screen point. Relayout, reflow, and window resizing move pixels around it without moving it. Each block keeps a <code>CTFramesetter</code> cache keyed by its text, width, and theme generation.</p>
+          </div>
+          <div class="feat">
+            <h3>Layout follows the viewport <span class="tag">windowing</span></h3>
+            <p>There is no character cap on a block. Layout is windowed to the viewport, so a block with hundreds of thousands of characters shapes only what you can see. Mapping a caret outside the window costs one line of shaping at most, never the whole block.</p>
+          </div>
+          <div class="feat">
+            <h3>A 100,000-character block, edited live <span class="tag">~21 ms</span></h3>
+            <p>A single giant block used to freeze for about 1,116 ms per keystroke. Incremental inline derivation, incremental layout repair, and a String.Index splice took that to roughly 21 ms median in a Release build. The splice itself is about 0.56 ms at 100k characters.</p>
+          </div>
+          <div class="feat">
+            <h3>Japanese input is a build gate <span class="tag">IME</span></h3>
+            <p>CJK composition is a first-class case. Marked text renders while the model stays unmutated until the composition commits. A scripted <code>NSTextInputClient</code> corpus, <code>IMEHarness</code>, is a named gate that runs before the engine ships. The author works in Japanese daily.</p>
+          </div>
+          <div class="feat">
+            <h3>The surface is pure SwiftUI now <span class="tag">Canvas</span></h3>
+            <p>The editor draws into a SwiftUI <code>Canvas</code> from a serializable list of draw commands replayed into a <code>GraphicsContext</code>. Core Text stays the typography layer. The one platform seam is a minimal <code>TextInputProxyView</code> for IME (<code>NSTextInputClient</code> on Mac, <code>UITextInput</code> on iOS).</p>
+          </div>
+          <div class="feat">
+            <h3>Caret motion matches the platform <span class="tag">geometry</span></h3>
+            <p>Trailing newlines, blank lines, and up/down motion are checked against <code>NSLayoutManager</code> as the oracle. Both the linear and windowed geometry paths must agree, enforced by a differential caret-motion test matrix.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 03 MODEL & MARKDOWN ── -->
+    <section class="tech" id="markdown">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">03 · Model &amp; Markdown</p>
+        <h2>One value type, and honest Markdown</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>Everything is a Block <span class="tag">value type</span></h3>
+            <p>A block holds an id, a parent, a fractional order, a <code>RowType</code>, its inline text, properties, and a collapsed flag. <code>RowType</code> covers plain rows, headings, bullets, numbered items, tasks, quotes, tables, and fenced code.</p>
+          </div>
+          <div class="feat">
+            <h3>Mutation has one door <span class="tag">Command / Diff</span></h3>
+            <p>Nothing mutates a block in place. The editor holds a <code>Snapshot</code>, sends a <code>Command</code> such as <code>splitBlock</code> or <code>indent</code>, and applies the returned <code>Diff</code>. Undo coalesces contiguous edits to one block, and a full IME composition is a single undo group.</p>
+          </div>
+          <div class="feat">
+            <h3>The source is the truth <span class="tag">source-canonical</span></h3>
+            <p>Inline styling is the Bike model: a plain string with tagged mark ranges, and no markup characters inside the display string. The stored text is the verbatim Markdown source, so what you wrote round-trips byte for byte.</p>
+          </div>
+          <div class="feat">
+            <h3>The Markdown reader is hand-rolled <span class="tag">MarkdownIO</span></h3>
+            <p>A line-oriented reader and writer, built in-house for byte stability rather than a general parser. A property test generates random trees, with every row type, mark, soft break, CJK, emoji, and escape, and asserts that write, read, write is a fixed point.</p>
+          </div>
+          <div class="feat">
+            <h3>Real constructs, not a subset <span class="tag">==  $  [!note]</span></h3>
+            <p>Highlight with <code>==text==</code>, callouts as a <code>RowType.callout</code>, reference links normalized to inline on paste, and math with <code>$…$</code> rendered by <strong>SwiftMath</strong> (Core Text, so no WebKit in the editor). Pipe tables and fenced code are the two multi-line block types.</p>
+          </div>
+          <div class="feat">
+            <h3>Syntax highlighting via tree-sitter <span class="tag">SwiftTreeSitter</span></h3>
+            <p>Code blocks tokenize through tree-sitter behind a <code>SyntaxTokenizer</code> protocol, with grammars pinned exactly (Swift, Python, JavaScript, JSON, Rust, Go, Bash). This one is built and gated on a later code-block phase, not yet switched on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 04 ON-DEVICE AI ── -->
+    <section class="tech tech-wrap-dark" id="ai">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">04 · On-device AI</p>
+        <h2>The model runs on your machine</h2>
+        <p class="tech-lead">No cloud inference, no embedding API, no telemetry, no account. The whole pipeline works on a plane. You can watch the network stay silent while it runs.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>A local LLM, loaded on demand <span class="tag">MLX</span></h3>
+            <p>Inference runs through Apple's <strong>MLX</strong> on Apple Silicon. The default model is Qwen3-4B at 4-bit, about 3 GB of RAM, with an 8B option on larger machines. <code>⌥⌘A</code> loads and unloads it, RAM is freed when off, and it idles out after fifteen minutes.</p>
+          </div>
+          <div class="feat">
+            <h3>Two transcription engines <span class="tag">SpeechAnalyzer · WhisperKit</span></h3>
+            <p>On macOS 26 the default is Apple's on-device <code>SpeechAnalyzer</code>, with no model download and faster-than-realtime output. <strong>WhisperKit</strong> (4-bit Core ML) is the alternative and the fallback, with explicit language detection for Japanese.</p>
+          </div>
+          <div class="feat">
+            <h3>Speakers, the honest version <span class="tag">Me / Them</span></h3>
+            <p>Calls capture two tracks, so the split into you and the far end is structural rather than guessed: the mic is you, the far end is them. Full per-speaker diarization is designed as a drop-in seam and is not built yet. v1 ships the two-track ladder.</p>
+          </div>
+          <div class="feat">
+            <h3>Semantic search with no vector database <span class="tag">Qwen3-Embedding</span></h3>
+            <p>Blocks embed to 1024 dimensions with a 0.6B on-device model. The vectors are fp16 BLOBs in a sibling SQLite file, searched by brute-force cosine through Accelerate's <code>cblas_sgemv</code>. That is 100% recall and a scan of a few milliseconds at 100k blocks, with no index to drift.</p>
+          </div>
+          <div class="feat">
+            <h3>Ask the whole vault <span class="tag">synthesis</span></h3>
+            <p>A vault question expands into a handful of queries, gathers the best passage per page above a relevance floor, and runs a map-reduce over the results. The answer is ephemeral until you choose to turn it into a page.</p>
+          </div>
+          <div class="feat">
+            <h3>Every AI edit is labelled <span class="tag">ai::</span></h3>
+            <p>Any block an AI wrote carries an <code>ai::</code> property with its source and a UTC timestamp, and the editor shows a small gutter mark. You can always tell your own words from the machine's.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 05 SEARCH & INDEX ── -->
+    <section class="tech" id="search">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">05 · Search &amp; index</p>
+        <h2>SQLite, tuned for two languages</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>GRDB migrations <span class="tag">GRDB 7</span></h3>
+            <p>The runtime index is plain SQLite through <strong>GRDB</strong>, defined as versioned migrations: pages, blocks, properties, references, assets, and full-text tables. The whole thing rebuilds from the Markdown files when it needs to.</p>
+          </div>
+          <div class="feat">
+            <h3>Trigram full-text search <span class="tag">FTS5</span></h3>
+            <p>Full-text search uses the FTS5 trigram tokenizer instead of the usual word tokenizer, so substring matching works across CJK for a bilingual English and Japanese vault.</p>
+          </div>
+          <div class="feat">
+            <h3>Backlinks in about a millisecond <span class="tag">1.17 ms</span></h3>
+            <p>Backlinks are a join on the references table. The budget is 100 ms; the measured time is 1.17 ms across 541 backlinks on the reference machine.</p>
+          </div>
+          <div class="feat">
+            <h3>Unicode-correct names <span class="tag">normalized</span></h3>
+            <p>Page-name and wikilink resolution use a full-Unicode case fold in a dedicated column, because SQLite's built-in case-insensitivity only covers ASCII. Later migrations made link resolution folder-agnostic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 06 CRDT & SYNC ── -->
+    <section class="tech tech-wrap-dark" id="sync">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">06 · CRDT &amp; sync</p>
+        <h2>Collaboration you can host yourself</h2>
+        <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT and still projects readable <code>.md</code> the whole time.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>A movable-tree CRDT <span class="tag">Loro</span></h3>
+            <p>Collaborative vaults use <strong>Loro</strong>, chosen for a first-class movable-tree type, which is exactly what an outline needs. The library is pinned exactly and quarantined to its own target. A Collaborative vault keeps a snapshot plus an append-only log beside the files.</p>
+          </div>
+          <div class="feat">
+            <h3>A relay that cannot read your vault <span class="tag">Rust</span></h3>
+            <p>The sync server is a content-blind store-and-forward relay written in Rust. It moves sealed bytes and never sees plaintext. It runs today as a Raspberry Pi appliance found over mDNS on the local network, using redb for storage and TLS with public-key pinning.</p>
+          </div>
+          <div class="feat">
+            <h3>Large vaults, chunked deltas <span class="tag">16 MiB</span></h3>
+            <p>An early bug capped WebSocket messages below the relay's blob size and caused an endless resubscribe loop. The fix raised the client limit to 16 MiB and split large deltas into sealed 4 MiB chunks, reassembled from ciphertext before a single decrypt.</p>
+          </div>
+          <div class="feat">
+            <h3>Two keys, two jobs <span class="tag">X25519 · Ed25519</span></h3>
+            <p>An at-rest vault key protects the files; a separate content key protects bytes on the wire. Membership is an owner-signed, append-only log with the content key wrapped to each member. Account identity is an Ed25519 signing key and an X25519 encryption key, syncable through iCloud Keychain.</p>
+          </div>
+          <div class="feat">
+            <h3>Verified across two Macs <span class="tag">435 MB</span></h3>
+            <p>Live two-Mac realtime sync is verified, including a 435 MB, thirteen-thousand-block vault syncing between machines over the local relay. The robustness work beyond that is built and tested, and not yet deployed to the live appliance.</p>
+          </div>
+          <div class="feat">
+            <h3>Markdown survives collaboration <span class="tag">S7</span></h3>
+            <p>Even a Collaborative vault keeps projecting plain <code>.md</code>, and migrating between Local and Collaborative preserves the ids. The promise that your vault reads as files with no app in sight holds in both modes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 07 ENCRYPTION ── -->
+    <section class="tech" id="encryption">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">07 · Encryption at rest</p>
+        <h2>Portable encryption, opt-in</h2>
+        <p class="tech-lead">Encryption is off by default and portable when you turn it on. The point is that an encrypted vault still opens with a standard tool and your key, with no app in the picture.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>Content is sealed with age <span class="tag">age</span></h3>
+            <p>Markdown, assets, and snapshots are encrypted in the <strong>age</strong> format (X25519, ChaCha20-Poly1305, HKDF). The implementation is CryptoKit-native and wire-compatible with stock <code>age</code>, proven both directions at the spike.</p>
+          </div>
+          <div class="feat">
+            <h3>Databases sealed whole <span class="tag">ChaCha20-Poly1305</span></h3>
+            <p>The runtime databases are sealed as whole files with ChaCha20-Poly1305, decrypted to the app container on unlock and re-sealed on lock. Full-database encryption and a stronger passphrase KDF are documented as later hardening.</p>
+          </div>
+          <div class="feat">
+            <h3>One key, many ways to unlock <span class="tag">Touch ID</span></h3>
+            <p>A per-vault identity key is wrapped in a keyring to one or more unlock sources: a passphrase, the Secure Enclave through Touch ID, and a recovery seam. Adding or removing a way to unlock re-wraps the key only; your content is never re-encrypted.</p>
+          </div>
+          <div class="feat">
+            <h3>You can always get back in <span class="tag">recovery key</span></h3>
+            <p>Turning on encryption forces you to export a recovery key and writes a plain <code>DECRYPT.md</code> with the exact commands to open the vault using stock tools. The model never sees ciphertext, and a crash mid-encrypt resumes cleanly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 08 DURABILITY & MEDIA ── -->
+    <section class="tech tech-wrap-dark" id="durability">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">08 · Durability &amp; media</p>
+        <h2>Built to outlive the app</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>The vault survives uninstall <span class="tag">S7</span></h3>
+            <p>Delete the app and the vault is still a folder of Markdown and assets you can read with anything. The runtime index is disposable and lives outside the vault, so nothing you care about depends on Enliner still being installed.</p>
+          </div>
+          <div class="feat">
+            <h3>Web pages, captured whole <span class="tag">single-file HTML</span></h3>
+            <p>Saving a web page produces a self-contained <code>.html</code> with its CSS and media inlined as data URIs, stored content-addressed. Ten years on it opens with no server and no dead links, because there is nothing left to fetch.</p>
+          </div>
+          <div class="feat">
+            <h3>Media is content-addressed <span class="tag">sha256</span></h3>
+            <p>Pasted and remote images are copied into the vault and named by their hash, which deduplicates identical files automatically. Remote images are fetched once and localized, so a link that dies upstream does not take your note with it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 09 GRAPH ── -->
+    <section class="tech" id="graph">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">09 · Graph view</p>
+        <h2>A force graph, drawn natively</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>A pure-Swift engine <span class="tag">GraphEngine</span></h3>
+            <p>The graph is its own Swift package with the force simulation, a quadtree, and breadth-first search, and no UI imports. LogSeq's WebGL and d3 stack was deliberately avoided; there are no new dependencies here.</p>
+          </div>
+          <div class="feat">
+            <h3>Sixty frames at two thousand nodes <span class="tag">Canvas</span></h3>
+            <p>The simulation runs off the main thread and hands a position buffer to a SwiftUI <code>Canvas</code>, which redraws each tick. The target is 60 fps at 2,000 nodes and 6,000 edges, with the main thread never blocked past a frame.</p>
+          </div>
+          <div class="feat">
+            <h3>A ported force layout <span class="tag">Barnes-Hut</span></h3>
+            <p>The layout is a compact d3-force port: link distance, many-body repulsion with a Barnes-Hut approximation, collision, and centering. Nodes seed by a deterministic phyllotaxis pattern from a page-id hash, and the layout reheats when the index changes.</p>
+          </div>
+          <div class="feat">
+            <h3>Pages are the nodes <span class="tag">page-level</span></h3>
+            <p>Nodes are pages, never individual blocks. Wikilinks, tags, and block references all resolve to page-level edges in one SQL pass, and node size scales by the cube root of degree so hubs read without swamping the view.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 10 VOICE & CALLS ── -->
+    <section class="tech tech-wrap-dark" id="voice">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">10 · Voice &amp; calls</p>
+        <h2>Recording that survives a crash</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>Both sides of the call <span class="tag">process tap</span></h3>
+            <p>Your voice comes from the mic; the far end comes from a Core Audio process tap. The two combine into an aggregate device with hardware drift compensation, so the tracks stay aligned to about 200 ms over an hour.</p>
+          </div>
+          <div class="feat">
+            <h3>A recording that cannot be truncated to nothing <span class="tag">CAF</span></h3>
+            <p>The master is a native-rate 16-bit CAF written to be read to end-of-file, so a recording cut off by a crash is still a valid file. A manifest is written before the first audio buffer, tying stray files to the page you armed.</p>
+          </div>
+          <div class="feat">
+            <h3>Recovery is idempotent <span class="tag">recovery</span></h3>
+            <p>Recordings stage in a non-purgeable recovery folder with an unflushed window under 100 ms. After a crash the app offers to recover, rebuilds the header from the manifest, and finalizes exactly as a clean call would. Running recovery twice is safe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 11 PERFORMANCE ── -->
+    <section class="tech" id="performance">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">11 · Performance</p>
+        <h2>Budgets you can fail a build against</h2>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>Seven criteria, written down <span class="tag">S1–S7</span></h3>
+            <p>The spec fixes the numbers: open a 10,000-block vault within 1.5 s, answer a keystroke within one frame, move a row within a frame with no cursor jump, round-trip byte for byte, resolve backlinks within 100 ms, save a self-contained snapshot, and survive uninstall.</p>
+          </div>
+          <div class="feat">
+            <h3>One source of truth for budgets <span class="tag">PerfBudgets</span></h3>
+            <p>The budgets live in one <code>PerfBudgets</code> type, and a headless harness plus a small <code>perf-run</code> command check the real numbers against them and print a pass-or-fail table. A regression is a failing build, not a feeling.</p>
+          </div>
+          <div class="feat">
+            <h3>Measured on real hardware <span class="tag">signposts</span></h3>
+            <p>Latency is attributed with <code>os_signpost</code> on the running app and the wired path, not on isolated probes, which have mispredicted by threefold. The lesson is written into how the project works.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 12 HOW IT'S BUILT ── -->
+    <section class="tech tech-wrap-dark" id="build">
+      <div class="tech-inner reveal">
+        <p class="tech-eyebrow">12 · How it is built</p>
+        <h2>An agent pipeline, with receipts</h2>
+        <p class="tech-lead">Most of this code was written by AI agents running a supervised loop. The discipline around that loop is the reason it holds up.</p>
+        <div class="tech-grid">
+          <div class="feat">
+            <h3>Design, code, review, fix, verify <span class="tag">pipeline</span></h3>
+            <p>Every task runs the same loop, and the review is done by a different agent than the one that wrote the code, so the adversarial read is real. One task is one commit, prefixed with its phase.</p>
+          </div>
+          <div class="feat">
+            <h3>Decisions are locked, and logged <span class="tag">D0–D31</span></h3>
+            <p>Thirty-plus locked decisions are not reopened in code. Anything that changes one lands as a dated entry in the decision log first. That log is public, below.</p>
+          </div>
+          <div class="feat">
+            <h3>Direct, signed, and offline <span class="tag">notarized .dmg</span></h3>
+            <p>Enliner ships as a notarized, Developer-ID signed disk image, updated through Sparkle with signed packages. The license check is verified offline and never phones home at launch, and it gates the app, never your <code>.md</code> files.</p>
+          </div>
+          <div class="feat">
+            <h3>Not the App Store, by design <span class="tag">direct</span></h3>
+            <p>There is no App Store build, because the payment path cannot coexist with the store's mandated in-app purchase. The distribution choice and the ownership model are the same decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DECISION LOG CTA ── -->
+    <section class="dz-cta" id="decisions-cta">
+      <div class="dz-cta-inner reveal">
+        <p class="tech-eyebrow">The paper trail</p>
+        <h2>Read the decision log</h2>
+        <p>
+          Every non-obvious choice in Enliner is written down the day it is made, with the
+          reasoning and the tradeoff. Browse the full log: locked decisions, reversals, spikes,
+          and the arguments behind them. Pricing and licensing entries are omitted from this
+          public copy.
+        </p>
+        <button class="dz-open-btn" data-dz-open>Open the decision log →</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
+      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+    </div>
+  </footer>
+
+  <!-- ─────────────────────────────  DECISIONS OVERLAY  ───────────────────────────── -->
+  <div class="dz" id="decisions" hidden role="dialog" aria-modal="true" aria-label="Enliner decision log">
+    <div class="dz-panel">
+      <div class="dz-head">
+        <h2>The decision log</h2>
+        <input class="dz-filter" type="search" placeholder="Filter decisions…" aria-label="Filter decisions" />
+        <button class="dz-close" data-dz-close aria-label="Close">×</button>
+      </div>
+      <div class="dz-split">
+        <nav class="dz-toc" aria-label="Decisions table of contents">
+          <ul class="dz-toc-list"></ul>
+        </nav>
+        <div class="dz-content">
+          <article class="dz-body"></article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js" defer></script>
+  <script src="decisions.js" defer></script>
+</body>
+</html>
