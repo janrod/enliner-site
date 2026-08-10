@@ -14,7 +14,8 @@
   --paper-2:    #ffffff;   /* pure white panels          */
   --bg-lines:   #d9d9dc;   /* decorative svg strokes     */
 
-  --measure: 40rem;                 /* readable line length */
+  --measure: 40rem;                 /* readable line length for prose */
+  --content: 60rem;                 /* 960px — the centered page column */
   --gutter: clamp(1.25rem, 5vw, 6rem);
 
   --step--1: clamp(0.82rem, 0.78rem + 0.2vw, 0.9rem);
@@ -89,7 +90,8 @@ em { font-style: italic; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.1rem var(--gutter);
+  /* bar spans full width; content aligns to the centered page column */
+  padding: 1.1rem max(var(--gutter), calc((100% - var(--content)) / 2));
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   background: color-mix(in srgb, var(--paper) 72%, transparent);
@@ -137,9 +139,9 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 /* ─────────────────────────────  HERO  ───────────────────────────── */
 .hero {
   min-height: 100svh; display: flex; flex-direction: column;
-  justify-content: center; padding-top: 7rem;
+  justify-content: center; align-items: center; padding-top: 7rem;
 }
-.hero-inner { max-width: 62rem; }
+.hero-inner { width: 100%; max-width: var(--content); }
 .hero-title {
   font-family: var(--serif);
   font-size: var(--step-4); line-height: 0.98; letter-spacing: -0.02em;
@@ -178,8 +180,8 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 
 /* ─────────────────────────────  PILLARS  ───────────────────────────── */
 .pillars { border-top: 1px solid var(--line); }
-.pillar-list { list-style: none; display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
-.pillar { display: grid; grid-template-columns: auto 1fr; column-gap: clamp(1.5rem, 4vw, 4rem); row-gap: 1rem; align-items: start; max-width: 68rem; }
+.pillar-list { list-style: none; display: grid; gap: clamp(2.5rem, 6vw, 5rem); max-width: var(--content); margin-inline: auto; }
+.pillar { display: grid; grid-template-columns: auto 1fr; column-gap: clamp(1.5rem, 4vw, 4rem); row-gap: 1rem; align-items: start; }
 .pillar-num {
   font-family: var(--serif); font-size: var(--step-2); color: var(--ink-faint);
   font-weight: 500; line-height: 1; padding-top: .1em;
@@ -197,8 +199,8 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 }
 
 /* ─────────────────────────────  PRICE  ───────────────────────────── */
-.price { border-top: 1px solid var(--line); text-align: center; }
-.price-inner { max-width: 60rem; margin: 0 auto; }
+.price { border-top: 1px solid var(--line); }
+.price-inner { max-width: var(--content); margin-inline: auto; }
 .price-head {
   font-family: var(--serif); font-weight: 500; font-size: var(--step-3);
   line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.6rem;
@@ -226,11 +228,13 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 
 /* ─────────────────────────────  ESSAY  ───────────────────────────── */
 .essay-wrap { border-top: 1px solid var(--line); background: var(--paper-2); }
-.essay, .essay-intro { max-width: var(--measure); margin: 0 auto; }
+.essay, .essay-intro { max-width: var(--content); margin-inline: auto; }
 .essay-intro { margin-bottom: clamp(2.5rem, 7vw, 5rem); }
 .essay-title { font-family: var(--serif); font-size: var(--step-3); line-height: 1.02; letter-spacing: -0.02em; font-weight: 500; }
 
 .essay { font-size: var(--step-1); }
+/* prose keeps a readable measure, left-aligned to the column edge */
+.essay p, .essay h3 { max-width: var(--measure); }
 .essay > section { padding: 0; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .essay h3 {
   font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em;
@@ -254,11 +258,11 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 }
 
 /* ─────────────────────────────  EARLY ACCESS  ───────────────────────────── */
-.access { border-top: 1px solid var(--line); text-align: center; }
-.access-inner { max-width: 46rem; margin: 0 auto; }
+.access { border-top: 1px solid var(--line); }
+.access-inner { max-width: var(--content); margin-inline: auto; }
 .access-head { font-family: var(--serif); font-weight: 500; font-size: var(--step-3); line-height: 1; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
-.access-sub { color: var(--ink-soft); max-width: 34rem; margin: 0 auto 2.2rem; }
-.access-form { display: flex; gap: .6rem; max-width: 30rem; margin: 0 auto; flex-wrap: wrap; }
+.access-sub { color: var(--ink-soft); max-width: 40rem; margin: 0 0 2.2rem; }
+.access-form { display: flex; gap: .6rem; max-width: 34rem; margin: 0; flex-wrap: wrap; }
 .access-form input {
   flex: 1 1 14rem; min-width: 0;
   font: inherit; font-size: var(--step-0); color: var(--ink);
@@ -284,7 +288,7 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 .foot { border-top: 1px solid var(--line); padding: 3rem var(--gutter); }
 .foot-inner {
   display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline;
-  justify-content: space-between; max-width: 76rem; margin: 0 auto;
+  justify-content: space-between; max-width: var(--content); margin-inline: auto;
   font-size: var(--step--1); color: var(--ink-faint);
 }
 .foot-mark { height: 15px; color: var(--ink); }
