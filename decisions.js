@@ -51,13 +51,23 @@
     while (i < lines.length) {
       var line = lines[i];
 
-      // fenced code
+      // Any line starting with ``` is consumed here, so it can never stall the
+      // loop. It becomes a code block only when it is a valid opener (bare ``` or
+      // ```lang, no spaces) AND a closing fence exists; otherwise it is plain text
+      // (e.g. prose that merely starts with ``` — which would otherwise swallow
+      // the rest of the document or hang the parser).
       if (/^```/.test(line)) {
-        var code = [];
+        if (/^```[^\s`]*\s*$/.test(line)) {
+          var j = i + 1;
+          while (j < lines.length && !/^```\s*$/.test(lines[j])) j++;
+          if (j < lines.length) {
+            out.push('<pre><code>' + esc(lines.slice(i + 1, j).join('\n')) + '</code></pre>');
+            i = j + 1;
+            continue;
+          }
+        }
+        out.push('<p>' + inline(line) + '</p>');
         i++;
-        while (i < lines.length && !/^```/.test(lines[i])) { code.push(lines[i]); i++; }
-        i++; // closing fence
-        out.push('<pre><code>' + esc(code.join('\n')) + '</code></pre>');
         continue;
       }
 
@@ -137,6 +147,11 @@
       var headings = [];
       bodyEl.innerHTML = render(md, headings);
       buildToc(headings);
+      var countEl = overlay.querySelector('.dz-count');
+      if (countEl) {
+        var entries = headings.filter(function (h) { return h.level === 2; }).length;
+        countEl.textContent = entries + ' entries';
+      }
     }).catch(function () {
       bodyEl.innerHTML = '<p class="dz-note">Could not load the decision log. ' +
         'You can read it directly at <a href="decisions.md">decisions.md</a>.</p>';
