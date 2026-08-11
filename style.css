@@ -109,6 +109,7 @@ em { font-style: italic; }
   transition: color .2s ease;
 }
 .nav-links a:hover { color: var(--ink); }
+.nav-links a.nav-current { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .nav-cta {
   color: var(--ink) !important; font-weight: 500;
   border: 1px solid var(--ink); border-radius: 100px;
