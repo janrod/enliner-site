@@ -71,7 +71,7 @@
         <h1 class="tech-title">The technology behind Enliner</h1>
         <p class="tech-lead">
           Enliner is a native macOS app written in Swift 6. The model layer is a standalone
-          package that imports no UI framework. Your files stay canonical on disk as Markdown,
+          package that imports no UI framework. Our files stay canonical on disk as Markdown,
           a SQLite index serves the runtime, and every edit writes both. Here is the detailed
           version, subsystem by subsystem, with the numbers and the dependencies.
         </p>
@@ -79,7 +79,7 @@
           <div class="stat"><div class="stat-num">7,149</div><div class="stat-label">automated tests, across 611 files</div></div>
           <div class="stat"><div class="stat-num">≤ 16 ms</div><div class="stat-label">budget per keystroke, at 10,000 blocks</div></div>
           <div class="stat"><div class="stat-num">0</div><div class="stat-label">servers, accounts, or telemetry</div></div>
-          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">of the AI runs on your Mac</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">of the AI runs on our Mac</div></div>
         </div>
       </div>
     </section>
@@ -97,7 +97,7 @@
           </div>
           <div class="feat">
             <h3>Files at rest, SQLite at runtime <span class="tag">invariant</span></h3>
-            <p>Your Markdown files are the source of truth on disk. A SQLite index is the source of truth while the app runs. Every edit writes both, and the index is fully rebuildable from the files. The index and other runtime state live outside the vault, in a device-local folder that never syncs.</p>
+            <p>Our Markdown files are the source of truth on disk. A SQLite index is the source of truth while the app runs. Every edit writes both, and the index is fully rebuildable from the files. The index and other runtime state live outside the vault, in a device-local folder that never syncs.</p>
           </div>
           <div class="feat">
             <h3>State lives behind an actor <span class="tag">Swift 6</span></h3>
@@ -124,7 +124,7 @@
           </div>
           <div class="feat">
             <h3>Layout follows the viewport <span class="tag">windowing</span></h3>
-            <p>There is no character cap on a block. Layout is windowed to the viewport, so a block with hundreds of thousands of characters shapes only what you can see. Mapping a caret outside the window costs one line of shaping at most, never the whole block.</p>
+            <p>There is no character cap on a block. Layout is windowed to the viewport, so a block with hundreds of thousands of characters shapes only what we can see. Mapping a caret outside the window costs one line of shaping at most, never the whole block.</p>
           </div>
           <div class="feat">
             <h3>A 100,000-character block, edited live <span class="tag">~21 ms</span></h3>
@@ -162,7 +162,7 @@
           </div>
           <div class="feat">
             <h3>The source is the truth <span class="tag">source-canonical</span></h3>
-            <p>Inline styling is the Bike model: a plain string with tagged mark ranges, and no markup characters inside the display string. The stored text is the verbatim Markdown source, so what you wrote round-trips byte for byte.</p>
+            <p>Inline styling is the Bike model: a plain string with tagged mark ranges, and no markup characters inside the display string. The stored text is the verbatim Markdown source, so what we wrote round-trips byte for byte.</p>
           </div>
           <div class="feat">
             <h3>The Markdown reader is hand-rolled <span class="tag">MarkdownIO</span></h3>
@@ -184,8 +184,8 @@
     <section class="tech tech-wrap-dark" id="ai">
       <div class="tech-inner reveal">
         <p class="tech-eyebrow">04 · On-device AI</p>
-        <h2>The model runs on your machine</h2>
-        <p class="tech-lead">No cloud inference, no embedding API, no telemetry, no account. The whole pipeline works on a plane. You can watch the network stay silent while it runs.</p>
+        <h2>The model runs on our machine</h2>
+        <p class="tech-lead">No cloud inference, no embedding API, no telemetry, no account. The whole pipeline works on a plane. We can watch the network stay silent while it runs.</p>
         <div class="tech-grid">
           <div class="feat">
             <h3>A local LLM, loaded on demand <span class="tag">MLX</span></h3>
@@ -197,7 +197,7 @@
           </div>
           <div class="feat">
             <h3>Speakers, the honest version <span class="tag">Me / Them</span></h3>
-            <p>Calls capture two tracks, so the split into you and the far end is structural rather than guessed: the mic is you, the far end is them. Full per-speaker diarization is designed as a drop-in seam and is not built yet. v1 ships the two-track ladder.</p>
+            <p>Calls capture two tracks, so the split into us and the far end is structural rather than guessed: the mic is us, the far end is them. Full per-speaker diarization is designed as a drop-in seam and is not built yet. v1 ships the two-track ladder.</p>
           </div>
           <div class="feat">
             <h3>Semantic search with no vector database <span class="tag">Qwen3-Embedding</span></h3>
@@ -205,11 +205,11 @@
           </div>
           <div class="feat">
             <h3>Ask the whole vault <span class="tag">synthesis</span></h3>
-            <p>A vault question expands into a handful of queries, gathers the best passage per page above a relevance floor, and runs a map-reduce over the results. The answer is ephemeral until you choose to turn it into a page.</p>
+            <p>A vault question expands into a handful of queries, gathers the best passage per page above a relevance floor, and runs a map-reduce over the results. The answer is ephemeral until we choose to turn it into a page.</p>
           </div>
           <div class="feat">
             <h3>Every AI edit is labelled <span class="tag">ai::</span></h3>
-            <p>Any block an AI wrote carries an <code>ai::</code> property with its source and a UTC timestamp, and the editor shows a small gutter mark. You can always tell your own words from the machine's.</p>
+            <p>Any block an AI wrote carries an <code>ai::</code> property with its source and a UTC timestamp, and the editor shows a small gutter mark. We can always tell our own words from the machine's.</p>
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@
     <section class="tech tech-wrap-dark" id="sync">
       <div class="tech-inner reveal">
         <p class="tech-eyebrow">06 · Sync, sharing &amp; the relay</p>
-        <h2>Collaboration you can host yourself</h2>
+        <h2>Collaboration we can host ourselves</h2>
         <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT, projects readable <code>.md</code> the whole time, and moves between machines through a relay that only ever sees ciphertext.</p>
         <div class="tech-grid">
           <div class="feat">
@@ -258,7 +258,7 @@
           </div>
           <div class="feat">
             <h3>Admission is a signed challenge <span class="tag">Ed25519</span></h3>
-            <p>To connect, the relay sends a random nonce and you sign it with your Ed25519 identity key. It checks that key against the room's member list. Your private key stays in your Mac's Keychain and never crosses the wire.</p>
+            <p>To connect, the relay sends a random nonce and we sign it with our Ed25519 identity key. It checks that key against the room's member list. Our private key stays in our Mac's Keychain and never crosses the wire.</p>
           </div>
           <div class="feat">
             <h3>Membership is a signed document <span class="tag">epoch</span></h3>
@@ -266,11 +266,11 @@
           </div>
           <div class="feat">
             <h3>The content key never reaches the relay <span class="tag">X25519</span></h3>
-            <p>Every delta is encrypted on your machine with the vault's content key before it is published. That key is wrapped to each member's X25519 public key, so adding someone means wrapping the key to them, not sharing a secret in the clear. The relay stores and forwards only what those keys have already sealed.</p>
+            <p>Every delta is encrypted on our machine with the vault's content key before it is published. That key is wrapped to each member's X25519 public key, so adding someone means wrapping the key to them, not sharing a secret in the clear. The relay stores and forwards only what those keys have already sealed.</p>
           </div>
           <div class="feat">
             <h3>Inviting someone <span class="tag">trust on first use</span></h3>
-            <p>An invite is a one-time code you pass out of band. Devices pin each other's key on first use, and you can confirm a short fingerprint to be sure. Once a member is verified, they are challenged again only if their key changes.</p>
+            <p>An invite is a one-time code we pass out of band. Devices pin each other's key on first use, and we can confirm a short fingerprint to be sure. Once a member is verified, they are challenged again only if their key changes.</p>
           </div>
           <div class="feat">
             <h3>Chunked, sealed deltas <span class="tag">4 MiB</span></h3>
@@ -281,7 +281,7 @@
             <p>The relay keeps a delta until every member has acknowledged it, then drops it, with a fourteen-day age-out and a 256 MiB per-room cap as backstops. An owner can mark a full-state snapshot so old history is reclaimed while the snapshot survives, and Stop Sharing wipes all server-side state for that vault at once. Its metrics report sizes and counts, never content.</p>
           </div>
           <div class="feat">
-            <h3>Run it on your own network <span class="tag">mDNS · wss</span></h3>
+            <h3>Run it on our own network <span class="tag">mDNS · wss</span></h3>
             <p>The relay advertises itself over mDNS as <code>_enliner._tcp</code>, so the app finds it on a flat network with nothing typed in. It terminates TLS itself with a self-signed certificate the app trusts by pinning the key's SPKI fingerprint. Install it as a hardened systemd service, keep the buffer on an SSD, and reach it from away over Tailscale rather than a forwarded port.</p>
           </div>
           <div class="feat">
@@ -290,11 +290,11 @@
           </div>
           <div class="feat">
             <h3>iCloud, the simpler option <span class="tag">D28</span></h3>
-            <p>A Local vault can sync as plain files through iCloud Drive, with no relay and no CRDT. The groundwork is done: runtime state like the index and caches was moved out of the vault into device-local storage, so only your canonical Markdown syncs and nothing machine-specific fights across devices. The file-sync transport on top of that is being finished.</p>
+            <p>A Local vault can sync as plain files through iCloud Drive, with no relay and no CRDT. The groundwork is done: runtime state like the index and caches was moved out of the vault into device-local storage, so only our canonical Markdown syncs and nothing machine-specific fights across devices. The file-sync transport on top of that is being finished.</p>
           </div>
           <div class="feat">
             <h3>Markdown survives, in every mode <span class="tag">S7</span></h3>
-            <p>A Collaborative vault keeps projecting plain <code>.md</code>, and moving a vault between Local and Collaborative preserves its ids. Whether you sync through the relay, through iCloud, or not at all, the vault still reads as files with no app in sight.</p>
+            <p>A Collaborative vault keeps projecting plain <code>.md</code>, and moving a vault between Local and Collaborative preserves its ids. Whether we sync through the relay, through iCloud, or not at all, the vault still reads as files with no app in sight.</p>
           </div>
         </div>
       </div>
@@ -305,7 +305,7 @@
       <div class="tech-inner reveal">
         <p class="tech-eyebrow">07 · Encryption at rest</p>
         <h2>Portable encryption, opt-in</h2>
-        <p class="tech-lead">Encryption is off by default and portable when you turn it on. The point is that an encrypted vault still opens with a standard tool and your key, with no app in the picture.</p>
+        <p class="tech-lead">Encryption is off by default and portable when we turn it on. The point is that an encrypted vault still opens with a standard tool and our key, with no app in the picture.</p>
         <div class="tech-grid">
           <div class="feat">
             <h3>Content is sealed with age <span class="tag">age</span></h3>
@@ -317,11 +317,11 @@
           </div>
           <div class="feat">
             <h3>One key, many ways to unlock <span class="tag">Touch ID</span></h3>
-            <p>A per-vault identity key is wrapped in a keyring to one or more unlock sources: a passphrase, the Secure Enclave through Touch ID, and a recovery seam. Adding or removing a way to unlock re-wraps the key only; your content is never re-encrypted.</p>
+            <p>A per-vault identity key is wrapped in a keyring to one or more unlock sources: a passphrase, the Secure Enclave through Touch ID, and a recovery seam. Adding or removing a way to unlock re-wraps the key only; our content is never re-encrypted.</p>
           </div>
           <div class="feat">
-            <h3>You can always get back in <span class="tag">recovery key</span></h3>
-            <p>Turning on encryption forces you to export a recovery key and writes a plain <code>DECRYPT.md</code> with the exact commands to open the vault using stock tools. The model never sees ciphertext, and a crash mid-encrypt resumes cleanly.</p>
+            <h3>We can always get back in <span class="tag">recovery key</span></h3>
+            <p>Turning on encryption forces us to export a recovery key and writes a plain <code>DECRYPT.md</code> with the exact commands to open the vault using stock tools. The model never sees ciphertext, and a crash mid-encrypt resumes cleanly.</p>
           </div>
         </div>
       </div>
@@ -335,7 +335,7 @@
         <div class="tech-grid">
           <div class="feat">
             <h3>The vault survives uninstall <span class="tag">S7</span></h3>
-            <p>Delete the app and the vault is still a folder of Markdown and assets you can read with anything. The runtime index is disposable and lives outside the vault, so nothing you care about depends on Enliner still being installed.</p>
+            <p>Delete the app and the vault is still a folder of Markdown and assets we can read with anything. The runtime index is disposable and lives outside the vault, so nothing we care about depends on Enliner still being installed.</p>
           </div>
           <div class="feat">
             <h3>Web pages, captured whole <span class="tag">single-file HTML</span></h3>
@@ -343,7 +343,7 @@
           </div>
           <div class="feat">
             <h3>Media is content-addressed <span class="tag">sha256</span></h3>
-            <p>Pasted and remote images are copied into the vault and named by their hash, which deduplicates identical files automatically. Remote images are fetched once and localized, so a link that dies upstream does not take your note with it.</p>
+            <p>Pasted and remote images are copied into the vault and named by their hash, which deduplicates identical files automatically. Remote images are fetched once and localized, so a link that dies upstream does not take our note with it.</p>
           </div>
         </div>
       </div>
@@ -383,11 +383,11 @@
         <div class="tech-grid">
           <div class="feat">
             <h3>Both sides of the call <span class="tag">process tap</span></h3>
-            <p>Your voice comes from the mic; the far end comes from a Core Audio process tap. The two combine into an aggregate device with hardware drift compensation, so the tracks stay aligned to about 200 ms over an hour.</p>
+            <p>Our voice comes from the mic; the far end comes from a Core Audio process tap. The two combine into an aggregate device with hardware drift compensation, so the tracks stay aligned to about 200 ms over an hour.</p>
           </div>
           <div class="feat">
             <h3>A recording that cannot be truncated to nothing <span class="tag">CAF</span></h3>
-            <p>The master is a native-rate 16-bit CAF written to be read to end-of-file, so a recording cut off by a crash is still a valid file. A manifest is written before the first audio buffer, tying stray files to the page you armed.</p>
+            <p>The master is a native-rate 16-bit CAF written to be read to end-of-file, so a recording cut off by a crash is still a valid file. A manifest is written before the first audio buffer, tying stray files to the page we armed.</p>
           </div>
           <div class="feat">
             <h3>Recovery is idempotent <span class="tag">recovery</span></h3>
@@ -401,7 +401,7 @@
     <section class="tech" id="performance">
       <div class="tech-inner reveal">
         <p class="tech-eyebrow">11 · Performance</p>
-        <h2>Budgets you can fail a build against</h2>
+        <h2>Budgets we can fail a build against</h2>
         <div class="tech-grid">
           <div class="feat">
             <h3>Seven criteria, written down <span class="tag">S1–S7</span></h3>
@@ -436,7 +436,7 @@
           </div>
           <div class="feat">
             <h3>Direct, signed, and offline <span class="tag">notarized .dmg</span></h3>
-            <p>Enliner ships as a notarized, Developer-ID signed disk image, updated through Sparkle with signed packages. The license check is verified offline and never phones home at launch, and it gates the app, never your <code>.md</code> files.</p>
+            <p>Enliner ships as a notarized, Developer-ID signed disk image, updated through Sparkle with signed packages. The license check is verified offline and never phones home at launch, and it gates the app, never our <code>.md</code> files.</p>
           </div>
           <div class="feat">
             <h3>Direct download, by design <span class="tag">direct</span></h3>
@@ -466,7 +466,7 @@
   <footer class="foot">
     <div class="foot-inner">
       <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
-      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on our own Mac.</span>
       <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
     </div>
   </footer>
