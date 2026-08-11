@@ -240,36 +240,60 @@
       </div>
     </section>
 
-    <!-- ── 06 CRDT & SYNC ── -->
+    <!-- ── 06 SYNC, SHARING & THE RELAY ── -->
     <section class="tech tech-wrap-dark" id="sync">
       <div class="tech-inner reveal">
-        <p class="tech-eyebrow">06 · CRDT &amp; sync</p>
+        <p class="tech-eyebrow">06 · Sync, sharing &amp; the relay</p>
         <h2>Collaboration you can host yourself</h2>
-        <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT and still projects readable <code>.md</code> the whole time.</p>
+        <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT, projects readable <code>.md</code> the whole time, and moves between machines through a relay that only ever sees ciphertext.</p>
         <div class="tech-grid">
           <div class="feat">
             <h3>A movable-tree CRDT <span class="tag">Loro</span></h3>
-            <p>Collaborative vaults use <strong>Loro</strong>, chosen for a first-class movable-tree type, which is exactly what an outline needs. The library is pinned exactly and quarantined to its own target. A Collaborative vault keeps a snapshot plus an append-only log beside the files.</p>
+            <p>Collaborative vaults use <strong>Loro</strong>, chosen for a first-class movable-tree type, which is exactly what an outline needs. A Collaborative vault keeps a snapshot plus an append-only log beside the files and projects readable Markdown the whole time.</p>
           </div>
           <div class="feat">
-            <h3>A relay that cannot read your vault <span class="tag">Rust</span></h3>
-            <p>The sync server is a content-blind store-and-forward relay written in Rust. It moves sealed bytes and never sees plaintext. It runs today as a Raspberry Pi appliance found over mDNS on the local network, using redb for storage and TLS with public-key pinning.</p>
+            <h3>A content-blind relay <span class="tag">Rust · redb</span></h3>
+            <p>The sync server is a single static Rust binary that forwards sealed bytes and never sees plaintext. It buffers each vault's deltas in an embedded <code>redb</code> file keyed by room and sequence, so a device that was offline catches up from the buffer with no other peer online. It authenticates who may sync; it cannot read what.</p>
           </div>
           <div class="feat">
-            <h3>Large vaults, chunked deltas <span class="tag">16 MiB</span></h3>
-            <p>An early bug capped WebSocket messages below the relay's blob size and caused an endless resubscribe loop. The fix raised the client limit to 16 MiB and split large deltas into sealed 4 MiB chunks, reassembled from ciphertext before a single decrypt.</p>
+            <h3>Admission is a signed challenge <span class="tag">Ed25519</span></h3>
+            <p>To connect, the relay sends a random nonce and you sign it with your Ed25519 identity key. It checks that key against the room's member list. Your private key stays in your Mac's Keychain and never crosses the wire.</p>
           </div>
           <div class="feat">
-            <h3>Two keys, two jobs <span class="tag">X25519 · Ed25519</span></h3>
-            <p>An at-rest vault key protects the files; a separate content key protects bytes on the wire. Membership is an owner-signed, append-only log with the content key wrapped to each member. Account identity is an Ed25519 signing key and an X25519 encryption key, syncable through iCloud Keychain.</p>
+            <h3>Membership is a signed document <span class="tag">epoch</span></h3>
+            <p>The member list is a small document the owner signs: the room, an epoch counter, the owner, and each member's key and role. Only an owner or admin can change it, and only with a higher epoch. The relay verifies the signature over the exact bytes and enforces who may write, without understanding a word of the content.</p>
+          </div>
+          <div class="feat">
+            <h3>The content key never reaches the relay <span class="tag">X25519</span></h3>
+            <p>Every delta is encrypted on your machine with the vault's content key before it is published. That key is wrapped to each member's X25519 public key, so adding someone means wrapping the key to them, not sharing a secret in the clear. The relay stores and forwards only what those keys have already sealed.</p>
+          </div>
+          <div class="feat">
+            <h3>Inviting someone <span class="tag">trust on first use</span></h3>
+            <p>An invite is a one-time code you pass out of band. Devices pin each other's key on first use, and you can confirm a short fingerprint to be sure. Once a member is verified, they are challenged again only if their key changes.</p>
+          </div>
+          <div class="feat">
+            <h3>Chunked, sealed deltas <span class="tag">4 MiB</span></h3>
+            <p>Large CRDT deltas split into sealed chunks of about 4 MiB, one seal per logical delta, reassembled from ciphertext before a single decrypt. An early bug capped WebSocket messages below the relay's blob size and caused a resubscribe loop; the client limit now sits well above it.</p>
+          </div>
+          <div class="feat">
+            <h3>Bounded and self-cleaning <span class="tag">256 MiB</span></h3>
+            <p>The relay keeps a delta until every member has acknowledged it, then drops it, with a fourteen-day age-out and a 256 MiB per-room cap as backstops. An owner can mark a full-state snapshot so old history is reclaimed while the snapshot survives, and Stop Sharing wipes all server-side state for that vault at once. Its metrics report sizes and counts, never content.</p>
+          </div>
+          <div class="feat">
+            <h3>Run it on your own network <span class="tag">mDNS · wss</span></h3>
+            <p>The relay advertises itself over mDNS as <code>_enliner._tcp</code>, so the app finds it on a flat network with nothing typed in. It terminates TLS itself with a self-signed certificate the app trusts by pinning the key's SPKI fingerprint. Install it as a hardened systemd service, keep the buffer on an SSD, and reach it from away over Tailscale rather than a forwarded port.</p>
           </div>
           <div class="feat">
             <h3>Verified across two Macs <span class="tag">435 MB</span></h3>
-            <p>Live two-Mac realtime sync is verified, including a 435 MB, thirteen-thousand-block vault syncing between machines over the local relay. The robustness work beyond that is built and tested, and not yet deployed to the live appliance.</p>
+            <p>Live two-Mac realtime sync is verified, including a 435 MB, thirteen-thousand-block vault syncing between machines over the local relay. The robustness work beyond that is built and tested.</p>
           </div>
           <div class="feat">
-            <h3>Markdown survives collaboration <span class="tag">S7</span></h3>
-            <p>Even a Collaborative vault keeps projecting plain <code>.md</code>, and migrating between Local and Collaborative preserves the ids. The promise that your vault reads as files with no app in sight holds in both modes.</p>
+            <h3>iCloud, the simpler option <span class="tag">D28</span></h3>
+            <p>A Local vault can sync as plain files through iCloud Drive, with no relay and no CRDT. The groundwork is done: runtime state like the index and caches was moved out of the vault into device-local storage, so only your canonical Markdown syncs and nothing machine-specific fights across devices. The file-sync transport on top of that is being finished.</p>
+          </div>
+          <div class="feat">
+            <h3>Markdown survives, in every mode <span class="tag">S7</span></h3>
+            <p>A Collaborative vault keeps projecting plain <code>.md</code>, and moving a vault between Local and Collaborative preserves its ids. Whether you sync through the relay, through iCloud, or not at all, the vault still reads as files with no app in sight.</p>
           </div>
         </div>
       </div>
