@@ -254,44 +254,38 @@
         <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT, projects readable <code>.md</code> the whole time, and moves between machines through a relay that only ever sees ciphertext.</p>
 
         <figure class="sync-diagram">
-          <svg viewBox="0 0 900 262" role="img" aria-labelledby="sync-dg-title sync-dg-desc" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="-12 -8 924 288" role="img" aria-labelledby="sync-dg-title sync-dg-desc" xmlns="http://www.w3.org/2000/svg">
             <title id="sync-dg-title">Enliner sync architecture</title>
             <desc id="sync-dg-desc">Two paths. Personal sync moves plain Markdown files through iCloud Drive between one person's devices. Shared sync moves end-to-end-encrypted CRDT deltas through a content-blind relay between collaborators.</desc>
+            <defs>
+              <filter id="dgShadow" x="-25%" y="-25%" width="150%" height="170%">
+                <feDropShadow dx="0" dy="2.5" stdDeviation="4.5" flood-color="#0a0a0a" flood-opacity="0.10" />
+              </filter>
+            </defs>
 
             <!-- ── Row 1: personal / iCloud ── -->
-            <text class="dg-eyebrow" x="2" y="15">Personal sync · one person, every device</text>
-            <!-- wires -->
+            <text class="dg-eyebrow" x="2" y="14">Personal sync · one person, every device</text>
             <line class="dg-wire" x1="182" y1="68" x2="360" y2="68" />
             <line class="dg-wire" x1="540" y1="68" x2="718" y2="68" />
-            <circle class="dg-dot" cx="182" cy="68" r="3.5" /><circle class="dg-dot" cx="360" cy="68" r="3.5" />
-            <circle class="dg-dot" cx="540" cy="68" r="3.5" /><circle class="dg-dot" cx="718" cy="68" r="3.5" />
+            <path class="dg-arrow" d="M189,62 L182,68 L189,74" /><path class="dg-arrow" d="M353,62 L360,68 L353,74" />
+            <path class="dg-arrow" d="M547,62 L540,68 L547,74" /><path class="dg-arrow" d="M711,62 L718,68 L711,74" />
             <text class="dg-wire-label" x="271" y="60">.md files</text>
             <text class="dg-wire-label" x="629" y="60">.md files</text>
-            <!-- nodes -->
-            <g><rect class="dg-node" x="2" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="92" y="70">Your Mac</text><text class="dg-sub" x="92" y="89">Local vault</text></g>
-            <g><rect class="dg-node" x="360" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="450" y="70">iCloud Drive</text><text class="dg-sub" x="450" y="89">your files, synced</text></g>
-            <g><rect class="dg-node dg-node--planned" x="718" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="808" y="70">iPad · iPhone</text><text class="dg-sub" x="808" y="89">planned</text></g>
+            <g><rect class="dg-node" x="2" y="36" width="180" height="64" rx="16" /><text class="dg-name" x="92" y="71">Your Mac</text><text class="dg-sub" x="92" y="90">Local vault</text></g>
+            <g><rect class="dg-node" x="360" y="36" width="180" height="64" rx="16" /><text class="dg-name" x="450" y="71">iCloud Drive</text><text class="dg-sub" x="450" y="90">your files, synced</text></g>
+            <g><rect class="dg-node dg-node--planned" x="718" y="36" width="180" height="64" rx="16" /><text class="dg-name" x="808" y="71">iPad · iPhone</text><text class="dg-sub" x="808" y="90">planned</text></g>
 
             <!-- ── Row 2: shared / relay ── -->
-            <text class="dg-eyebrow" x="2" y="151">Shared sync · a few people, one vault</text>
-            <!-- wires -->
-            <line class="dg-wire" x1="172" y1="212" x2="360" y2="212" />
-            <line class="dg-wire" x1="560" y1="212" x2="730" y2="212" />
-            <circle class="dg-dot" cx="172" cy="212" r="3.5" /><circle class="dg-dot" cx="360" cy="212" r="3.5" />
-            <circle class="dg-dot" cx="560" cy="212" r="3.5" /><circle class="dg-dot" cx="730" cy="212" r="3.5" />
-            <text class="dg-wire-label" x="266" y="204">ciphertext</text>
-            <text class="dg-wire-label" x="645" y="204">ciphertext</text>
-            <!-- nodes -->
-            <g><rect class="dg-node" x="2" y="180" width="170" height="64" rx="13" /><text class="dg-name" x="87" y="214">You</text><text class="dg-sub" x="87" y="233">Collaborative vault</text></g>
-            <g>
-              <rect class="dg-node dg-node--relay" x="360" y="170" width="200" height="84" rx="14" />
-              <text class="dg-name" x="460" y="203">Relay</text>
-              <text class="dg-sub" x="460" y="222">sees only sealed bytes</text>
-              <!-- padlock glyph -->
-              <path class="dg-lock" d="M454 240 v-3 a6 6 0 0 1 12 0 v3" />
-              <rect class="dg-lock" x="450" y="240" width="20" height="12" rx="2.5" fill="var(--paper-2)" />
-            </g>
-            <g><rect class="dg-node" x="730" y="180" width="170" height="64" rx="13" /><text class="dg-name" x="815" y="214">A collaborator</text><text class="dg-sub" x="815" y="233">their own Mac</text></g>
+            <text class="dg-eyebrow" x="2" y="156">Shared sync · a few people, one vault</text>
+            <line class="dg-wire" x1="172" y1="216" x2="360" y2="216" />
+            <line class="dg-wire" x1="560" y1="216" x2="730" y2="216" />
+            <path class="dg-arrow" d="M179,210 L172,216 L179,222" /><path class="dg-arrow" d="M353,210 L360,216 L353,222" />
+            <path class="dg-arrow" d="M567,210 L560,216 L567,222" /><path class="dg-arrow" d="M723,210 L730,216 L723,222" />
+            <text class="dg-wire-label" x="266" y="208">ciphertext</text>
+            <text class="dg-wire-label" x="645" y="208">ciphertext</text>
+            <g><rect class="dg-node" x="2" y="184" width="170" height="64" rx="16" /><text class="dg-name" x="87" y="219">You</text><text class="dg-sub" x="87" y="238">Collaborative vault</text></g>
+            <g><rect class="dg-node" x="360" y="184" width="200" height="64" rx="16" /><text class="dg-name" x="460" y="219">Relay</text><text class="dg-sub" x="460" y="238">sees only sealed bytes</text></g>
+            <g><rect class="dg-node" x="730" y="184" width="170" height="64" rx="16" /><text class="dg-name" x="815" y="219">A collaborator</text><text class="dg-sub" x="815" y="238">their own Mac</text></g>
           </svg>
         </figure>
         <p class="dg-cap">
