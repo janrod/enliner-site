@@ -249,6 +249,7 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 .price-big span { display: block; font-family: var(--sans); font-size: var(--step--1); color: var(--ink-faint); letter-spacing: .04em; margin-top: .5rem; text-transform: none; }
 .price-detail { color: var(--ink-soft); font-size: var(--step-0); margin-top: auto; }
 .price-them { opacity: .72; }
+.price-note { max-width: var(--measure); margin: 2rem auto 0; color: var(--ink-soft); font-size: var(--step-0); line-height: 1.55; text-align: center; }
 .price-versus { align-self: center; color: var(--ink-faint); font-family: var(--serif); font-style: italic; font-size: var(--step-1); }
 @media (max-width: 680px) {
   .price-compare { grid-template-columns: 1fr; }
@@ -343,6 +344,21 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 .stat-num { font-family: var(--serif); font-size: var(--step-2); line-height: 1; font-weight: 500; }
 .stat-label { font-size: var(--step--1); color: var(--ink-faint); margin-top: .4rem; }
 @media (max-width: 720px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* sync architecture diagram */
+.sync-diagram { max-width: var(--content); margin: 2.6rem auto 0.5rem; color: var(--ink); }
+.sync-diagram svg { width: 100%; height: auto; display: block; }
+.dg-node { fill: var(--paper-2); stroke: currentColor; stroke-width: 1.5; }
+.dg-node--planned { stroke-dasharray: 6 5; opacity: 0.55; }
+.dg-node--relay { stroke-width: 1.5; }
+.dg-wire { stroke: currentColor; stroke-width: 1.5; opacity: 0.42; fill: none; }
+.dg-dot { fill: currentColor; opacity: 0.55; }
+.dg-name { fill: currentColor; font-family: var(--sans); font-size: 16px; font-weight: 500; text-anchor: middle; }
+.dg-sub { fill: var(--ink-faint); font-family: var(--sans); font-size: 12.5px; text-anchor: middle; }
+.dg-eyebrow { fill: var(--ink-faint); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.dg-wire-label { fill: var(--ink-soft); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; text-anchor: middle; }
+.dg-lock { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.dg-cap { color: var(--ink-soft); font-size: var(--step--1); max-width: var(--measure); margin: 1rem 0 0; }
 
 /* a titled technical block */
 .tech { border-top: 1px solid var(--line); }

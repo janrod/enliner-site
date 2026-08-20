@@ -108,6 +108,10 @@
             <h3>Stable identity for every block <span class="tag">ULID</span></h3>
             <p>Each block carries a 26-character Crockford base32 ULID, minted once and never rewritten. The generator is about forty hand-rolled lines with no dependency. Sibling order is a fractional key, so inserting between two blocks never renumbers the rest.</p>
           </div>
+          <div class="feat">
+            <h3>One Swift core, more platforms coming <span class="tag">iPad · iPhone</span></h3>
+            <p>The model and editor are plain Swift 6 with a single small platform seam for text input (<code>NSTextInputClient</code> on Mac, <code>UITextInput</code> on iOS). Most of the app carries over to iPad and iPhone as a theme swap on the same core, which is why those apps are what we build next.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -248,6 +252,55 @@
         <p class="tech-eyebrow">06 · Sync, sharing &amp; the relay</p>
         <h2>Collaboration we can host ourselves</h2>
         <p class="tech-lead">Sync is opt-in, per vault. A Local vault stays plain Markdown and never talks to a server. A Collaborative vault runs a CRDT, projects readable <code>.md</code> the whole time, and moves between machines through a relay that only ever sees ciphertext.</p>
+
+        <figure class="sync-diagram">
+          <svg viewBox="0 0 900 262" role="img" aria-labelledby="sync-dg-title sync-dg-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="sync-dg-title">Enliner sync architecture</title>
+            <desc id="sync-dg-desc">Two paths. Personal sync moves plain Markdown files through iCloud Drive between one person's devices. Shared sync moves end-to-end-encrypted CRDT deltas through a content-blind relay between collaborators.</desc>
+
+            <!-- ── Row 1: personal / iCloud ── -->
+            <text class="dg-eyebrow" x="2" y="15">Personal sync · one person, every device</text>
+            <!-- wires -->
+            <line class="dg-wire" x1="182" y1="68" x2="360" y2="68" />
+            <line class="dg-wire" x1="540" y1="68" x2="718" y2="68" />
+            <circle class="dg-dot" cx="182" cy="68" r="3.5" /><circle class="dg-dot" cx="360" cy="68" r="3.5" />
+            <circle class="dg-dot" cx="540" cy="68" r="3.5" /><circle class="dg-dot" cx="718" cy="68" r="3.5" />
+            <text class="dg-wire-label" x="271" y="60">.md files</text>
+            <text class="dg-wire-label" x="629" y="60">.md files</text>
+            <!-- nodes -->
+            <g><rect class="dg-node" x="2" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="92" y="70">Your Mac</text><text class="dg-sub" x="92" y="89">Local vault</text></g>
+            <g><rect class="dg-node" x="360" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="450" y="70">iCloud Drive</text><text class="dg-sub" x="450" y="89">your files, synced</text></g>
+            <g><rect class="dg-node dg-node--planned" x="718" y="36" width="180" height="64" rx="13" /><text class="dg-name" x="808" y="70">iPad · iPhone</text><text class="dg-sub" x="808" y="89">planned</text></g>
+
+            <!-- ── Row 2: shared / relay ── -->
+            <text class="dg-eyebrow" x="2" y="151">Shared sync · a few people, one vault</text>
+            <!-- wires -->
+            <line class="dg-wire" x1="172" y1="212" x2="360" y2="212" />
+            <line class="dg-wire" x1="560" y1="212" x2="730" y2="212" />
+            <circle class="dg-dot" cx="172" cy="212" r="3.5" /><circle class="dg-dot" cx="360" cy="212" r="3.5" />
+            <circle class="dg-dot" cx="560" cy="212" r="3.5" /><circle class="dg-dot" cx="730" cy="212" r="3.5" />
+            <text class="dg-wire-label" x="266" y="204">ciphertext</text>
+            <text class="dg-wire-label" x="645" y="204">ciphertext</text>
+            <!-- nodes -->
+            <g><rect class="dg-node" x="2" y="180" width="170" height="64" rx="13" /><text class="dg-name" x="87" y="214">You</text><text class="dg-sub" x="87" y="233">Collaborative vault</text></g>
+            <g>
+              <rect class="dg-node dg-node--relay" x="360" y="170" width="200" height="84" rx="14" />
+              <text class="dg-name" x="460" y="203">Relay</text>
+              <text class="dg-sub" x="460" y="222">sees only sealed bytes</text>
+              <!-- padlock glyph -->
+              <path class="dg-lock" d="M454 240 v-3 a6 6 0 0 1 12 0 v3" />
+              <rect class="dg-lock" x="450" y="240" width="20" height="12" rx="2.5" fill="var(--paper-2)" />
+            </g>
+            <g><rect class="dg-node" x="730" y="180" width="170" height="64" rx="13" /><text class="dg-name" x="815" y="214">A collaborator</text><text class="dg-sub" x="815" y="233">their own Mac</text></g>
+          </svg>
+        </figure>
+        <p class="dg-cap">
+          Personal sync moves the vault's plain Markdown through iCloud Drive, with no relay and no CRDT.
+          Shared sync runs a Loro CRDT and a content-blind relay that only ever forwards bytes sealed on your
+          machine; host it yourself, down to a Raspberry Pi on your own network. The iPad and iPhone apps are
+          on the way, built on the same Swift core.
+        </p>
+
         <div class="tech-grid">
           <div class="feat">
             <h3>A movable-tree CRDT <span class="tag">Loro</span></h3>
