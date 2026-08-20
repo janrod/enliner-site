@@ -179,6 +179,21 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 @keyframes drop { 0% { top: -46px; } 60%,100% { top: 46px; } }
 @media (prefers-reduced-motion: reduce) { .scroll-hint { display: none; } }
 
+/* ─────────────────────────────  PRODUCT  ───────────────────────────── */
+.product { border-top: 1px solid var(--line); background: var(--paper-2); }
+.product-inner { max-width: var(--content); margin-inline: auto; }
+.product-intro { margin-bottom: clamp(2.5rem, 7vw, 5rem); }
+.product-title { font-family: var(--serif); font-weight: 500; font-size: var(--step-3); line-height: 1.02; letter-spacing: -0.02em; }
+.product-lead { max-width: var(--measure); color: var(--ink-soft); font-size: var(--step-1); line-height: 1.5; margin-top: 1.4rem; }
+.feature { margin-bottom: clamp(3rem, 8vw, 6rem); }
+.feature:last-child { margin-bottom: 0; }
+.feature-num { font-family: var(--serif); font-size: var(--step-1); color: var(--ink-faint); font-weight: 500; display: block; margin-bottom: .4rem; }
+.feature-callout { font-family: var(--serif); font-weight: 500; font-size: var(--step-2); line-height: 1.1; letter-spacing: -0.01em; max-width: var(--measure); }
+.feature-desc { color: var(--ink-soft); font-size: var(--step-1); line-height: 1.55; max-width: var(--measure); margin-top: .7rem; margin-bottom: 1.8rem; }
+.shot { margin: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper); box-shadow: 0 24px 60px -30px color-mix(in srgb, var(--ink) 45%, transparent); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot--inset img { padding: 0; }
+
 /* ─────────────────────────────  PILLARS  ───────────────────────────── */
 .pillars { border-top: 1px solid var(--line); }
 .pillar-list { list-style: none; display: grid; gap: clamp(2.5rem, 6vw, 5rem); max-width: var(--content); margin-inline: auto; }
