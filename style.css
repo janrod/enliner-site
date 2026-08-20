@@ -1,5 +1,5 @@
 /* ============================================================================
-   Enliner — enliner.jp
+   Enliner — enliner.net
    Minimal black-and-white single-page site.
    No framework, no build step. Design goals: information clarity, whitespace,
    monochrome, quiet motion (parallax + reveal). Respects prefers-reduced-motion.
@@ -258,6 +258,7 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
 .essay p + p { text-indent: 0; }
 .essay em { font-style: italic; }
 .essay strong { font-weight: 600; }
+.essay-cta { margin-top: 2.2rem; }
 .essay blockquote {
   font-family: var(--serif); font-style: italic; font-size: var(--step-1);
   line-height: 1.5; color: var(--ink-soft);

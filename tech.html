@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Enliner – Under the hood" />
   <meta property="og:description" content="The technology behind Enliner: a from-scratch caret engine, Loro CRDT, on-device AI, and a browsable decision log." />
-  <meta property="og:url" content="https://enliner.jp/tech.html" />
+  <meta property="og:url" content="https://enliner.net/tech.html" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -54,10 +54,9 @@
       <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
     </a>
     <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="index.html#price">Price</a>
+      <a href="philosophy.html">Philosophy</a>
       <a href="tech.html" class="nav-current" aria-current="page">Tech</a>
-      <a href="#decisions" data-dz-open>Decisions</a>
+      <a href="index.html#price">Price</a>
       <a class="nav-cta" href="index.html#access">Early access</a>
     </nav>
   </header>
@@ -71,7 +70,7 @@
         <h1 class="tech-title">The technology behind Enliner</h1>
         <p class="tech-lead">
           Enliner is a native macOS app written in Swift 6. The model layer is a standalone
-          package that imports no UI framework. Our files stay canonical on disk as Markdown,
+          package that imports no UI framework. Your files stay canonical on disk as Markdown,
           a SQLite index serves the runtime, and every edit writes both. Here is the detailed
           version, subsystem by subsystem, with the numbers and the dependencies.
         </p>
@@ -79,7 +78,7 @@
           <div class="stat"><div class="stat-num">7,149</div><div class="stat-label">automated tests, across 611 files</div></div>
           <div class="stat"><div class="stat-num">≤ 16 ms</div><div class="stat-label">budget per keystroke, at 10,000 blocks</div></div>
           <div class="stat"><div class="stat-num">0</div><div class="stat-label">servers, accounts, or telemetry</div></div>
-          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">of the AI runs on our Mac</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">of the AI runs on your Mac</div></div>
         </div>
       </div>
     </section>
@@ -466,7 +465,7 @@
   <footer class="foot">
     <div class="foot-inner">
       <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
-      <span class="foot-tag">A private thinking tool for the AI age. It stays on our own Mac.</span>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
       <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
     </div>
   </footer>

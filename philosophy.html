@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enliner – Computing you own</title>
+  <meta name="description" content="The philosophy behind Enliner: as the cloud moves to meter computation, it should still run on hardware you own. A working app as a stake in the ground for personal computing." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Enliner – Computing you own" />
+  <meta property="og:description" content="As the cloud moves to meter computation, it should still run on hardware you own. The philosophy behind Enliner, and an honest account of what it is." />
+  <meta property="og:url" content="https://enliner.net/philosophy.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── Enliner wordmark, defined once, referenced via <use>. fill=currentColor. ── -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="enliner-wordmark" viewBox="0 0 1568 170">
+      <g transform="matrix(1,0,0,1,-304.650591,-564.824219)" fill="currentColor" fill-rule="nonzero">
+        <path d="M304.651,734.453L319.299,564.824L380.237,564.824L365.588,734.453L304.651,734.453ZM321.35,582.402L322.815,564.824L516.467,564.824L515.002,582.402L321.35,582.402ZM309.631,734.453L311.096,716.875L503.576,716.875L502.112,734.453L309.631,734.453ZM316.662,652.422L318.127,634.844L507.092,634.844L505.627,652.422L316.662,652.422Z"/>
+        <path d="M539.026,734.453L553.674,564.824L614.612,564.824L599.963,734.453L539.026,734.453ZM697.229,734.453L711.877,564.824L772.815,564.824L758.166,734.453L697.229,734.453ZM697.229,734.453L567.737,564.824L614.612,564.824L744.104,734.453L697.229,734.453Z"/>
+        <path d="M799.182,734.453L813.83,564.824L874.768,564.824L860.119,734.453L799.182,734.453ZM804.162,734.453L805.627,716.875L998.108,716.875L996.643,734.453L804.162,734.453Z"/>
+        <path d="M1065.197,734.453L1079.846,564.824L1140.783,564.824L1126.135,734.453L1065.197,734.453ZM934.944,582.402L936.408,564.824L1133.342,564.824L1131.877,582.402L934.944,582.402ZM1072.053,734.453L1073.518,716.875L1120.451,716.875L1118.987,734.453L1072.053,734.453Z"/>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1185.022,734.453L1199.67,564.824L1260.608,564.824L1245.959,734.453L1185.022,734.453ZM1343.225,734.453L1357.873,564.824L1418.811,564.824L1404.162,734.453L1343.225,734.453ZM1343.225,734.453L1213.733,564.824L1260.608,564.824L1390.1,734.453L1343.225,734.453Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1445.178,734.453L1459.826,564.824L1520.764,564.824L1506.115,734.453L1445.178,734.453ZM1461.877,582.402L1463.342,564.824L1656.994,564.824L1655.529,582.402L1461.877,582.402ZM1450.158,734.453L1451.623,716.875L1644.104,716.875L1642.639,734.453L1450.158,734.453ZM1457.19,652.422L1458.654,634.844L1647.619,634.844L1646.154,652.422L1457.19,652.422Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1691.565,652.422L1693.029,634.844L1881.994,634.844L1880.529,652.422L1691.565,652.422ZM1679.553,734.453L1694.201,564.824L1755.139,564.824L1740.49,734.453L1679.553,734.453ZM1697.424,582.402L1698.889,564.824L1887.854,564.824L1886.389,582.402L1697.424,582.402ZM1823.694,652.422L1831.311,564.824L1892.248,564.824L1884.631,652.422L1823.694,652.422ZM1816.662,734.453L1787.951,638.945L1848.889,638.945L1877.6,734.453L1816.662,734.453Z"/>
+        </g>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ─────────────────────────────  BACKGROUND  ───────────────────────────── -->
+  <div class="bg" aria-hidden="true">
+    <svg class="bg-layer" data-depth="0.12" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="contours" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M-40 220 C 260 120, 520 300, 760 220 S 1240 120, 1500 240" />
+        <path d="M-40 300 C 260 200, 520 380, 760 300 S 1240 200, 1500 320" />
+        <path d="M-40 380 C 260 280, 520 460, 760 380 S 1240 280, 1500 400" />
+        <path d="M-40 460 C 260 360, 520 540, 760 460 S 1240 360, 1500 480" />
+        <path d="M-40 540 C 260 440, 520 620, 760 540 S 1240 440, 1500 560" />
+      </g>
+    </svg>
+    <div class="bg-grain"></div>
+  </div>
+
+  <!-- ─────────────────────────────  NAV  ───────────────────────────── -->
+  <header class="nav">
+    <a class="wordmark" href="index.html" aria-label="Enliner home">
+      <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+    </a>
+    <nav class="nav-links">
+      <a href="philosophy.html" class="nav-current" aria-current="page">Philosophy</a>
+      <a href="tech.html">Tech</a>
+      <a href="index.html#price">Price</a>
+      <a class="nav-cta" href="index.html#access">Early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ─────────────────────────────  ESSAY  ───────────────────────────── -->
+    <section class="essay-wrap" id="essay">
+      <div class="essay-intro reveal">
+        <p class="section-kicker">The philosophy behind Enliner</p>
+        <h2 class="essay-title">Computing should happen<br />on hardware you own.</h2>
+      </div>
+      <div class="essay">
+        <section id="buildout" class="reveal">
+          <h3>The quiet fight over where computing happens</h3>
+          <p>There is an enormous amount of money going into data centers right now, and it is worth asking what all of it is actually for. The pitch underneath it is that real computation is too heavy to run where you are, so it belongs in the cloud instead, on silicon you rent by the minute and reach across the network. Each year a little more of what used to run on your own machine gets pulled onto someone else's, and you pay to keep reaching it.</p>
+          <p>I think this is the fight that decides the next decade of personal computing, and most people will never be asked which side they are on. The default is being chosen for them: computation moves off the machines we own and into rented capacity we do not, metered and logged, and switched off the day the payments stop.</p>
+        </section>
+
+        <section id="capable" class="reveal">
+          <h3>You already own a computer that can do this</h3>
+          <p>The strange part is how capable the machine on your desk already is. A Mac with Apple Silicon can transcribe your calls, run a real language model, and search across everything you have ever written, all on its own, without asking anyone for permission first. The push to meter compute is not really a story about what your hardware can do. It is a story about where the value ends up. Run the work in the cloud and the value accrues to whoever owns the cloud. Run it on the machine you already paid for and it stays with you.</p>
+        </section>
+
+        <section id="cheap" class="reveal">
+          <h3>Code got cheap</h3>
+          <p>For most of software's history the expensive part was the code itself. Building something real took skilled engineers, months of their time, and a great deal of money spent before there was anything to sell, which is roughly why software companies are shaped the way they are. They raised the money, hired the people, and then had to earn it all back from you.</p>
+          <p>That cost is collapsing. I built Enliner largely by describing what I wanted to AI agents and supervising the work, and what came out the other side is a real native Mac app, with a text engine written from scratch and your notes kept as plain Markdown on disk. It opens a ten-thousand-block vault in under a second, answers a keystroke in a few milliseconds, and carries more than seven thousand automated tests. Measured in the old currency of engineering hours, it cost almost nothing to make.</p>
+          <p>I lead with this because it is the whole opening. Once code gets cheap enough that one person can build a serious tool, we stop having to accept the tools we are handed.</p>
+        </section>
+
+        <section id="deal" class="reveal">
+          <h3>What the metered deal actually costs</h3>
+          <p>Most AI software asks for the same arrangement. Hand over your notes, your calls, and your thinking, and it will be made smart for you in return, running on servers you never have to think about. It reads like a fair trade, and for a while it genuinely was one. Someone had to pay for the machines and the people, and the subscription covered them.</p>
+          <p>Those costs are falling out from under the deal while the deal stays exactly the same. The compute can run on the Mac you already own, and the code is cheap to write. What is left is a monthly fee to reach your own thinking, sitting on hardware you do not control, kept under a retention policy you did not write and used to train the next model. For a business the bill runs well past the invoice, into the liability of your conversations living in someone else's system and the options you quietly give up once moving your data somewhere else has been made hard on purpose.</p>
+        </section>
+
+        <section id="tool" class="reveal">
+          <h3>Use AI on your own machine</h3>
+          <p>None of this is an argument against AI. I use it every day, and Enliner is built on it. It is a genuinely good tool, and the point is to keep it that way: something you aim at your work, whose results you keep, running somewhere you control. The catch is that once a model can read everything you give it and hand it back, the thinking you handed over stops being only yours. Running it on your own machine is how you get the help without giving that part away. There is something fitting about building a little independence out of the very technology being used to erode it, and that is the move Enliner makes.</p>
+        </section>
+
+        <section id="design" class="reveal">
+          <h3>Independence you can actually choose</h3>
+          <p>Independence here does not mean running your own servers. Almost nobody wants that, and I am not asking anyone to. It means choosing where you lean on someone else on purpose, and keeping the door open behind you. Your knowledge lives in plain files you can read without the app. The parts that reach for the cloud stay swappable, so you can carry them elsewhere. You lean on the cloud where it earns its place and keep the rest close.</p>
+          <p>Dependence you pick deliberately, and can reverse, is fine. The kind that arrives as the only option, with no way back out, is the kind that costs you later. Every one of those is a decision somebody makes for you inside the software, whether you see it or not. Enliner makes them in your favor, and it makes them in the open.</p>
+        </section>
+
+        <section id="artifact" class="reveal">
+          <h3>Enliner is the argument, built</h3>
+          <p>Enliner is what all of this looks like once it stops being talk. It keeps your notes, calls, and voice memos on your own Mac and turns them into something you can think inside: pages, links, and a graph that connect what you know. The AI runs locally, on models that live on the machine. Nothing is uploaded and nothing trains a model, and you can prove that to yourself by switching on airplane mode and watching the whole thing keep working. You buy it once, it keeps running whether or not you keep paying, and your work stays in plain Markdown you will still be able to open in ten years.</p>
+          <p>I am not going to tell you it is perfect. The on-device models are smaller than the largest ones in the cloud, and for the hardest tasks the cloud is still ahead. I am betting that keeping your thinking on your own machine is worth more than the last increment of quality, and I would rather say that plainly than pretend it away.</p>
+          <p>What Enliner is, honestly, is a stake in the ground. One working piece of software that does the things people reach for big companies to do, and does them standing on its own, on hardware you own. A small proof that the other way is possible, and already here.</p>
+        </section>
+
+        <section id="close" class="reveal">
+          <h3>Somebody has to pick it up</h3>
+          <p>A future where computing stays personal will not arrive on its own. Someone has to build the tools that make it real, and then other people have to want them enough to use them. I decided to build one of the tools. If any of this lands with you, that is the point: making things is cheap enough now that you can build your own corner of it instead of accepting the one that was designed for you.</p>
+          <p>Enliner is built in the open and not on sale yet. Follow along, or ask for early access.</p>
+          <p class="essay-cta"><a class="btn btn-solid" href="index.html#access">Get early access</a></p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
+      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

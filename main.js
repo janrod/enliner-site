@@ -1,5 +1,5 @@
 /* ============================================================================
-   Enliner — enliner.jp
+   Enliner — enliner.net
    Progressive enhancement only: the page is fully readable with JS disabled.
    - parallax background layers (rAF-throttled)
    - reveal-on-scroll (IntersectionObserver)
@@ -93,10 +93,10 @@
           form.reset();
           setStatus("You're on the list. Talk soon.", 'ok');
         } else {
-          setStatus('Something went wrong — try again, or email hello@enliner.jp.', 'err');
+          setStatus('Something went wrong. Try again, or email hello@enliner.net.', 'err');
         }
       }).catch(function () {
-        setStatus('Network hiccup — try again, or email hello@enliner.jp.', 'err');
+        setStatus('Network hiccup. Try again, or email hello@enliner.net.', 'err');
       }).finally(function () {
         button.disabled = false;
       });
