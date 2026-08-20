@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enliner – Design principles</title>
+  <meta name="description" content="The five design principles Enliner is built on: personal compute, offline-first, plain-file ownership, secure minimal sync, and buy-once. Commitments you can verify by using it." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Enliner – Design principles" />
+  <meta property="og:description" content="Personal compute, offline-first, plain-file ownership, secure minimal sync, buy-once. The five commitments Enliner is built on, the kind you can verify by using it." />
+  <meta property="og:url" content="https://enliner.net/principles.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── Enliner wordmark, defined once, referenced via <use>. fill=currentColor. ── -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="enliner-wordmark" viewBox="0 0 1568 170">
+      <g transform="matrix(1,0,0,1,-304.650591,-564.824219)" fill="currentColor" fill-rule="nonzero">
+        <path d="M304.651,734.453L319.299,564.824L380.237,564.824L365.588,734.453L304.651,734.453ZM321.35,582.402L322.815,564.824L516.467,564.824L515.002,582.402L321.35,582.402ZM309.631,734.453L311.096,716.875L503.576,716.875L502.112,734.453L309.631,734.453ZM316.662,652.422L318.127,634.844L507.092,634.844L505.627,652.422L316.662,652.422Z"/>
+        <path d="M539.026,734.453L553.674,564.824L614.612,564.824L599.963,734.453L539.026,734.453ZM697.229,734.453L711.877,564.824L772.815,564.824L758.166,734.453L697.229,734.453ZM697.229,734.453L567.737,564.824L614.612,564.824L744.104,734.453L697.229,734.453Z"/>
+        <path d="M799.182,734.453L813.83,564.824L874.768,564.824L860.119,734.453L799.182,734.453ZM804.162,734.453L805.627,716.875L998.108,716.875L996.643,734.453L804.162,734.453Z"/>
+        <path d="M1065.197,734.453L1079.846,564.824L1140.783,564.824L1126.135,734.453L1065.197,734.453ZM934.944,582.402L936.408,564.824L1133.342,564.824L1131.877,582.402L934.944,582.402ZM1072.053,734.453L1073.518,716.875L1120.451,716.875L1118.987,734.453L1072.053,734.453Z"/>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1185.022,734.453L1199.67,564.824L1260.608,564.824L1245.959,734.453L1185.022,734.453ZM1343.225,734.453L1357.873,564.824L1418.811,564.824L1404.162,734.453L1343.225,734.453ZM1343.225,734.453L1213.733,564.824L1260.608,564.824L1390.1,734.453L1343.225,734.453Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1445.178,734.453L1459.826,564.824L1520.764,564.824L1506.115,734.453L1445.178,734.453ZM1461.877,582.402L1463.342,564.824L1656.994,564.824L1655.529,582.402L1461.877,582.402ZM1450.158,734.453L1451.623,716.875L1644.104,716.875L1642.639,734.453L1450.158,734.453ZM1457.19,652.422L1458.654,634.844L1647.619,634.844L1646.154,652.422L1457.19,652.422Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1691.565,652.422L1693.029,634.844L1881.994,634.844L1880.529,652.422L1691.565,652.422ZM1679.553,734.453L1694.201,564.824L1755.139,564.824L1740.49,734.453L1679.553,734.453ZM1697.424,582.402L1698.889,564.824L1887.854,564.824L1886.389,582.402L1697.424,582.402ZM1823.694,652.422L1831.311,564.824L1892.248,564.824L1884.631,652.422L1823.694,652.422ZM1816.662,734.453L1787.951,638.945L1848.889,638.945L1877.6,734.453L1816.662,734.453Z"/>
+        </g>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ─────────────────────────────  BACKGROUND  ───────────────────────────── -->
+  <div class="bg" aria-hidden="true">
+    <svg class="bg-layer" data-depth="0.12" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="contours" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M-40 220 C 260 120, 520 300, 760 220 S 1240 120, 1500 240" />
+        <path d="M-40 300 C 260 200, 520 380, 760 300 S 1240 200, 1500 320" />
+        <path d="M-40 380 C 260 280, 520 460, 760 380 S 1240 280, 1500 400" />
+        <path d="M-40 460 C 260 360, 520 540, 760 460 S 1240 360, 1500 480" />
+      </g>
+    </svg>
+    <div class="bg-grain"></div>
+  </div>
+
+  <!-- ─────────────────────────────  NAV  ───────────────────────────── -->
+  <header class="nav">
+    <a class="wordmark" href="index.html" aria-label="Enliner home">
+      <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+    </a>
+    <nav class="nav-links">
+      <a href="philosophy.html">Philosophy</a>
+      <a href="principles.html" class="nav-current" aria-current="page">Principles</a>
+      <a href="tech.html">Tech</a>
+      <a href="index.html#price">Price</a>
+      <a class="nav-cta" href="index.html#access">Early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ─────────────────────────────  INTRO  ───────────────────────────── -->
+    <section class="essay-wrap" id="intro">
+      <div class="essay-intro reveal">
+        <p class="section-kicker">Design principles</p>
+        <h2 class="essay-title">Principles, built<br />into the software.</h2>
+        <p class="collab-lead" style="margin-top:1.6rem">
+          Anyone can write a values page. These are the design decisions Enliner actually
+          runs on, the kind you can verify by using it. Every one is made in your favor,
+          and made in the open.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────  PRINCIPLES  ───────────────────────────── -->
+    <section class="pillars" id="principles">
+      <ol class="pillar-list">
+        <li class="pillar reveal">
+          <span class="pillar-num">01</span>
+          <h2>Personal<br /><span class="pillar-not">compute</span></h2>
+          <p>
+            The transcription, the search, and the AI all run on the Mac in front of you, on
+            models that live on the machine. Computation stays where you are, instead of on
+            rented silicon you reach across the network. That is the whole point: the value
+            of the work stays with the person doing it.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">02</span>
+          <h2>Offline<br /><span class="pillar-not">first</span></h2>
+          <p>
+            Enliner needs no login and no server to do its job, and everything works offline
+            at full strength. You can prove it in five seconds: turn on airplane mode, and it
+            all keeps working.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">03</span>
+          <h2>Your data<br /><span class="pillar-not">stays plain files</span></h2>
+          <p>
+            Your vault is standard Markdown on disk, one file per page, and those files are
+            the original your work lives in. The app keeps a database for speed, but it is
+            only an index: delete the app and your writing is still there, readable in ten
+            years by anything that opens text.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">04</span>
+          <h2>Sync that<br /><span class="pillar-not">can't read you</span></h2>
+          <p>
+            Sharing a vault is optional. When you turn it on, sync moves through a small relay
+            that only ever sees sealed bytes, with everything end-to-end encrypted to keys the
+            members hold. If you would rather trust no one, you can run the relay yourself,
+            down to a Raspberry Pi on your own network.
+          </p>
+        </li>
+        <li class="pillar reveal">
+          <span class="pillar-num">05</span>
+          <h2>Buy it once,<br /><span class="pillar-not">keep it for good</span></h2>
+          <p>
+            You pay a single price and the app is yours, with no subscription metering your
+            own notes back to you. Stop paying for updates and nothing is taken away: the
+            version you have keeps working, offline, for as long as you want it.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ─────────────────────────────  CLOSE  ───────────────────────────── -->
+    <section class="access" id="more">
+      <div class="access-inner reveal">
+        <p class="section-kicker">Why it's built this way</p>
+        <h2 class="access-head">The argument<br />behind the principles.</h2>
+        <p class="access-sub">
+          These commitments come out of a bigger question about where computing should happen
+          as the cloud moves to meter all of it. That is the philosophy behind the project.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="philosophy.html">Read the philosophy →</a>
+          <a class="btn btn-ghost" href="index.html#access">Get early access</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
+      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
