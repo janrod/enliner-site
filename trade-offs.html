@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enliner – Trade-offs</title>
+  <meta name="description" content="An honest account of what Enliner gives up: on-device AI has real limits, one person built it, and its code was written with AI. Here is why those trade-offs are the point." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Enliner – Trade-offs" />
+  <meta property="og:description" content="On-device AI has real limits. One person built it, with AI. Here is an honest account of the trade-offs, and why keeping your work on your own machine is worth them." />
+  <meta property="og:url" content="https://enliner.net/trade-offs.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="enliner-wordmark" viewBox="0 0 1568 170">
+      <g transform="matrix(1,0,0,1,-304.650591,-564.824219)" fill="currentColor" fill-rule="nonzero">
+        <path d="M304.651,734.453L319.299,564.824L380.237,564.824L365.588,734.453L304.651,734.453ZM321.35,582.402L322.815,564.824L516.467,564.824L515.002,582.402L321.35,582.402ZM309.631,734.453L311.096,716.875L503.576,716.875L502.112,734.453L309.631,734.453ZM316.662,652.422L318.127,634.844L507.092,634.844L505.627,652.422L316.662,652.422Z"/>
+        <path d="M539.026,734.453L553.674,564.824L614.612,564.824L599.963,734.453L539.026,734.453ZM697.229,734.453L711.877,564.824L772.815,564.824L758.166,734.453L697.229,734.453ZM697.229,734.453L567.737,564.824L614.612,564.824L744.104,734.453L697.229,734.453Z"/>
+        <path d="M799.182,734.453L813.83,564.824L874.768,564.824L860.119,734.453L799.182,734.453ZM804.162,734.453L805.627,716.875L998.108,716.875L996.643,734.453L804.162,734.453Z"/>
+        <path d="M1065.197,734.453L1079.846,564.824L1140.783,564.824L1126.135,734.453L1065.197,734.453ZM934.944,582.402L936.408,564.824L1133.342,564.824L1131.877,582.402L934.944,582.402ZM1072.053,734.453L1073.518,716.875L1120.451,716.875L1118.987,734.453L1072.053,734.453Z"/>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1185.022,734.453L1199.67,564.824L1260.608,564.824L1245.959,734.453L1185.022,734.453ZM1343.225,734.453L1357.873,564.824L1418.811,564.824L1404.162,734.453L1343.225,734.453ZM1343.225,734.453L1213.733,564.824L1260.608,564.824L1390.1,734.453L1343.225,734.453Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1445.178,734.453L1459.826,564.824L1520.764,564.824L1506.115,734.453L1445.178,734.453ZM1461.877,582.402L1463.342,564.824L1656.994,564.824L1655.529,582.402L1461.877,582.402ZM1450.158,734.453L1451.623,716.875L1644.104,716.875L1642.639,734.453L1450.158,734.453ZM1457.19,652.422L1458.654,634.844L1647.619,634.844L1646.154,652.422L1457.19,652.422Z"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-20,0)">
+          <path d="M1691.565,652.422L1693.029,634.844L1881.994,634.844L1880.529,652.422L1691.565,652.422ZM1679.553,734.453L1694.201,564.824L1755.139,564.824L1740.49,734.453L1679.553,734.453ZM1697.424,582.402L1698.889,564.824L1887.854,564.824L1886.389,582.402L1697.424,582.402ZM1823.694,652.422L1831.311,564.824L1892.248,564.824L1884.631,652.422L1823.694,652.422ZM1816.662,734.453L1787.951,638.945L1848.889,638.945L1877.6,734.453L1816.662,734.453Z"/>
+        </g>
+      </g>
+    </symbol>
+  </svg>
+
+  <div class="bg" aria-hidden="true">
+    <svg class="bg-layer" data-depth="0.12" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="contours" stroke="currentColor" fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M-40 220 C 260 120, 520 300, 760 220 S 1240 120, 1500 240" />
+        <path d="M-40 300 C 260 200, 520 380, 760 300 S 1240 200, 1500 320" />
+        <path d="M-40 380 C 260 280, 520 460, 760 380 S 1240 280, 1500 400" />
+        <path d="M-40 460 C 260 360, 520 540, 760 460 S 1240 360, 1500 480" />
+      </g>
+    </svg>
+    <div class="bg-grain"></div>
+  </div>
+
+  <header class="nav">
+    <a class="wordmark" href="index.html" aria-label="Enliner home">
+      <svg class="brand-logo" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#product">Product</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="principles.html">Principles</a>
+      <a href="trade-offs.html" class="nav-current" aria-current="page">Trade-offs</a>
+      <a href="tech.html">Tech</a>
+      <a class="nav-cta" href="index.html#access">Early access</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="essay-wrap" id="essay">
+      <div class="essay-intro reveal">
+        <p class="section-kicker">Trade-offs</p>
+        <h2 class="essay-title">The trade-offs,<br />out loud.</h2>
+      </div>
+      <div class="essay">
+        <section id="experiment" class="reveal">
+          <h3>An experiment, and one person built it</h3>
+          <p>Enliner is a working prototype, not a finished product from a large company. One person designed and built it, mostly by directing AI. It runs, and it is measured on real hardware, and there are gaps and rough edges that a bigger team and more time would smooth out. I would rather say that plainly than dress it up. What follows are the trade-offs it makes on purpose, and why I think they are the right ones.</p>
+        </section>
+
+        <section id="compute" class="reveal">
+          <h3>On-device models have real limits</h3>
+          <p>The AI in Enliner runs on the machine in front of you, and that comes with a ceiling. When you ask a big cloud service to transcribe a call or summarize a document, it reaches for racks of GPUs with terabytes of memory. Enliner does the same job on one computer, on roughly an order of magnitude less compute. For summarizing your own calls and notes, the on-device models are good, and they keep getting better. For the very hardest tasks, the frontier cloud models are still ahead. That gap is real. Pretending otherwise would be the dishonest part.</p>
+        </section>
+
+        <section id="trade" class="reveal">
+          <h3>The trade is worth it, and it is yours to make</h3>
+          <p>Winning every benchmark was never the goal. For the things you do every day, keeping your thinking on your own machine is worth more than the last increment of quality. When a job genuinely needs the cloud, use the cloud, on purpose. The difference is that you are making the trade deliberately, rather than having it made for you as the default.</p>
+        </section>
+
+        <section id="split" class="reveal">
+          <h3>Some work belongs in the cloud. Most of this does not.</h3>
+          <p>There is real cloud-scale work. Synthesizing a whole vault against a model that needs terabytes of memory and a million-token window is a data-center job, and Enliner will reach for the cloud when you ask it to. Transcribing a phone call is not that. Taking a voice memo is not that. Writing and organizing your notes is not that. A surprising amount of what we have been taught to rent runs perfectly well on hardware we already own.</p>
+        </section>
+
+        <section id="built-with-ai" class="reveal">
+          <h3>Built with AI, and not shy about it</h3>
+          <p>Enliner's code was written largely by describing what I wanted to AI agents and supervising the work. That is the same shift the whole project is about. The tools got cheap enough that one person can build a real, native app, so I used them to build one that then runs entirely on your machine. Using good tools to make something you can own is exactly the point.</p>
+          <p>I am not against the cloud, and I pay for the best models myself, because for some work they earn it. The argument here is narrower and more practical than a rejection of any of it.</p>
+        </section>
+
+        <section id="subscriptions" class="reveal">
+          <h3>Subscriptions fit services, not personal software</h3>
+          <p>A subscription makes sense for a continuous service that runs for you around the clock. It fits personal software badly. Recording a call, taking a voice memo, writing in an outline: these are things your own computer can do, and a tool that does them should not quietly bill you every month for the privilege. Renting is the right shape for some things. It became the default for almost everything, and that is the part worth pushing back on.</p>
+        </section>
+
+        <section id="future" class="reveal">
+          <h3>A hint at a different future</h3>
+          <p>Part of why Enliner exists is to argue that the future could go another way, and to make that argument as something you can actually run. Treat it as a small piece of design fiction: software from a future where personal computing is personal again. Where the internet is a transport layer and the apps on your machine are yours. Where a device does not have to be online and streaming to be useful, because a great deal of the world does not live with constant, uninterrupted connectivity, and software should meet people where they are.</p>
+          <p>That is the future worth building toward, and Enliner is one attempt to show what it feels like in the hand.</p>
+        </section>
+
+        <section id="close" class="reveal">
+          <h3>The decision stays yours</h3>
+          <p>None of this is a rejection of the tools we have. It is a set of deliberate choices about where your work lives and who it answers to. The limits are real, the trade-offs are on the table, and the call is yours to make.</p>
+          <p class="essay-cta"><a class="btn btn-solid" href="philosophy.html">Read the philosophy →</a> <a class="btn btn-ghost" href="index.html#access">Get early access</a></p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
+      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
+      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
