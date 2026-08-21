@@ -126,6 +126,7 @@ section { padding: clamp(4.5rem, 12vh, 11rem) var(--gutter); position: relative;
   font-size: var(--step--1); letter-spacing: .18em; text-transform: uppercase;
   color: var(--ink-faint); font-weight: 500; margin-bottom: 1.4rem;
 }
+.byline { font-size: var(--step--1); color: var(--ink-faint); font-style: italic; margin: -0.8rem 0 1.4rem; }
 
 /* Reveal-on-scroll */
 .reveal {

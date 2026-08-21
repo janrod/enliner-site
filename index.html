@@ -83,7 +83,6 @@
       <a href="principles">Principles</a>
       <a href="tradeoffs">Trade-offs</a>
       <a href="tech">Tech</a>
-      <a href="#price">Price</a>
       <a class="nav-cta" href="#access">Early access</a>
     </nav>
   </header>
@@ -94,54 +93,26 @@
     <section class="hero" id="hero">
       <div class="hero-inner reveal">
         <p class="kicker">A private thinking tool for the AI age</p>
+        <p class="byline">written by humans</p>
         <h1 class="hero-title">
-          Own your<br /><em>thinking.</em>
+          Own your<br /><em>thoughts.</em>
         </h1>
-        <p class="hero-sub">
-          Enliner keeps your notes, calls, and know-how on the Mac in front of you, and
-          runs its AI there too, so your work stays yours: plain files you keep, on hardware
-          you own. You buy it once, with no account, no cloud, and no subscription.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-solid" href="#access">Get early access</a>
-          <a class="btn btn-ghost" href="philosophy">Read the philosophy →</a>
-        </div>
-        <p class="hero-note">Built in the open · Not on sale yet · macOS 26+ · Apple Silicon</p>
       </div>
       <div class="scroll-hint" aria-hidden="true"><span></span></div>
     </section>
 
-    <!-- ─────────────────────────────  PILLARS  ───────────────────────────── -->
-    <section class="pillars" id="pillars">
-      <ol class="pillar-list">
-        <li class="pillar reveal">
-          <span class="pillar-num">01</span>
-          <h2>It runs<br /><span class="pillar-not">on your Mac</span></h2>
-          <p>
-            Enliner captures, transcribes, and summarizes your calls and voice memos on the
-            machine in front of you. Nothing is uploaded, and none of it trains a model. You
-            can check that for yourself: turn on airplane mode, and everything still works.
-          </p>
-        </li>
-        <li class="pillar reveal">
-          <span class="pillar-num">02</span>
-          <h2>A place to<br /><span class="pillar-not">actually think</span></h2>
-          <p>
-            It is an outliner built around pages, links, and a graph that tie your knowledge
-            together. Calls and voice memos are one way things get in; what you build out of
-            them over months and years is the actual point.
-          </p>
-        </li>
-        <li class="pillar reveal">
-          <span class="pillar-num">03</span>
-          <h2>Yours<br /><span class="pillar-not">to keep</span></h2>
-          <p>
-            You buy Enliner once, and it keeps running whether or not you keep paying. Your
-            knowledge lives in plain Markdown you will still be able to open in ten years,
-            with or without the app, so you can walk away any time and take all of it with you.
-          </p>
-        </li>
-      </ol>
+    <!-- ─────────────────────────────  PITCH  ───────────────────────────── -->
+    <section class="essay-wrap" id="pitch">
+      <div class="essay reveal">
+        <section>
+          <p>We are quickly moving into the future where big AI powered cloud eats all thinking that we produce and then re-sells it to us at the price of a subscription. We have to fight back by building the future that we want.</p>
+          <p>Enliner is an experiment, an artifact and a tool: a human-designed, AI-coded opinionated Markdown outliner with a set of thinking tools: voice memos, call transcription, a knowledge graph, and AI tools for brainstorming, synthesis and critique. It runs open edge models on your own Mac.</p>
+          <p>There is a license and a price (we all need to eat), and you can use it forever with a free year of upgrades.</p>
+          <p>Sync is supported via iCloud, which is fine for most folks, or a self-hosted <a href="https://loro.dev/">Loro</a> CRDT relay: a Rust binary that does cryptographically-powered user management. You can run it on your own SBC or a Mac in an office.</p>
+          <p>Enliner is offline-first: all functionality is contained on your machine, including the AI features. It does not transmit any data anywhere. No telemetry, no user tracking. The only connections it makes are for licensing and model download.</p>
+          <p>Enliner runs only on macOS 26+ and Apple Silicon. Your computer should have 16GB of RAM for basic AI functionality; 64GB+ is recommended for advanced AI features.</p>
+        </section>
+      </div>
     </section>
 
     <!-- ─────────────────────────────  PRODUCT  ───────────────────────────── -->
@@ -272,50 +243,8 @@
       </div>
     </section>
 
-    <!-- ─────────────────────────────  COLLABORATION  ───────────────────────────── -->
-    <section class="collab" id="collab">
-      <div class="collab-inner reveal">
-        <p class="section-kicker">Sync &amp; sharing</p>
-        <h2 class="collab-head">Share it without<br />giving it away.</h2>
-        <p class="collab-lead">
-          Sync one vault across your own Macs through iCloud, as plain files, with nothing in
-          between. Or go multiplayer when you want to work with someone else: two people edit
-          the same outline live, offline changes merge cleanly on reconnect, and the vault
-          stays plain Markdown the whole way through.
-        </p>
-        <div class="collab-grid">
-          <div class="collab-item">
-            <h3>Real-time, offline-first</h3>
-            <p>
-              A movable-tree CRDT (Loro) merges everyone's edits with no central authority
-              deciding who wins. Work on a plane, reconnect, and it reconciles on its own.
-            </p>
-          </div>
-          <div class="collab-item">
-            <h3>A relay you run yourself</h3>
-            <p>
-              Sync moves through a small, content-blind relay in Rust that forwards sealed
-              bytes and never sees your text. It ships as a single binary you download and run
-              on hardware you control, down to a Raspberry Pi on your own network, so nothing
-              about your vault depends on a company staying in business.
-            </p>
-          </div>
-          <div class="collab-item">
-            <h3>End-to-end encrypted</h3>
-            <p>
-              Everything on the wire is sealed to keys only the members hold, so even the
-              relay carrying your vault around cannot read a word of it.
-            </p>
-          </div>
-        </div>
-        <p class="collab-more">
-          The technical version lives on the <a href="tech#sync">tech page</a>.
-        </p>
-      </div>
-    </section>
-
     <!-- ─────────────────────────────  PRICE ANCHOR  ───────────────────────────── -->
-    <section class="price" id="price">
+    <section class="price" id="price-anchor">
       <div class="price-inner reveal">
         <p class="section-kicker">Buy once, update when you want</p>
         <h2 class="price-head">Own it once.<br />Yours for good.</h2>
@@ -329,35 +258,12 @@
               updates is $20 whenever you want one, and it brings every release since.
             </p>
           </div>
-          <div class="price-versus" aria-hidden="true">vs</div>
-          <div class="price-card price-them">
-            <p class="price-name">Cloud AI subscriptions</p>
-            <p class="price-big">$216<span>a year, forever</span></p>
-            <p class="price-detail">
-              Around $648 over three years, and it never stops. Miss a payment and the app
-              stops with it. Your notes and conversations sit on servers you don't control.
-            </p>
-          </div>
         </div>
         <p class="price-note">
           This is not a subscription. Buy it in year one, use it free through year three, and
           if year four brings a feature you want, $20 catches you up on all of it. Stop paying
           and nothing is ever taken away.
         </p>
-      </div>
-    </section>
-
-    <!-- ─────────────────────────────  PHILOSOPHY TEASER  ───────────────────────────── -->
-    <section class="essay-wrap" id="philosophy">
-      <div class="essay-intro reveal">
-        <p class="section-kicker">The idea behind it</p>
-        <h2 class="essay-title">Computing should happen<br />on hardware you own.</h2>
-      </div>
-      <div class="essay reveal">
-        <section>
-          <p>Enliner is one answer to a larger question: as the cloud moves to meter every bit of computation, where should it actually run? Code got cheap enough that one person can build a serious tool, which means we no longer have to accept the ones we are handed. The full argument, and an honest account of what Enliner is and is not, lives on its own page.</p>
-          <p class="essay-cta"><a class="btn btn-ghost" href="philosophy">Read the philosophy →</a></p>
-        </section>
       </div>
     </section>
 
@@ -381,7 +287,7 @@
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
         <p class="access-fallback">
-          Prefer email? Write to <a href="mailto:hello@enliner.net">hello@enliner.net</a>.
+          Prefer email? Write to <a href="mailto:enliner@enclave.jp">enliner@enclave.jp</a>.
         </p>
       </div>
     </section>
@@ -391,8 +297,8 @@
   <footer class="foot">
     <div class="foot-inner">
       <svg class="brand-logo foot-mark" viewBox="0 0 1568 170" role="img" aria-label="Enliner"><use href="#enliner-wordmark"/></svg>
-      <span class="foot-tag">A private thinking tool for the AI age. It stays on your Mac.</span>
-      <span class="foot-copy">© 2026 · Made on a Mac · Nothing leaves it.</span>
+      <span class="foot-tag">Built in Tokyo by Enclave Inc. — a case study and an experiment.</span>
+      <span class="foot-copy">© 2026 Enclave Inc. · Made on a Mac · Nothing leaves it.</span>
     </div>
   </footer>
 

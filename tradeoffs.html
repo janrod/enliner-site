@@ -61,7 +61,6 @@
       <a href="principles">Principles</a>
       <a href="tradeoffs" class="nav-current" aria-current="page">Trade-offs</a>
       <a href="tech">Tech</a>
-      <a href="/#price">Price</a>
       <a class="nav-cta" href="/#access">Early access</a>
     </nav>
   </header>
@@ -70,49 +69,37 @@
     <section class="essay-wrap" id="essay">
       <div class="essay-intro reveal">
         <p class="section-kicker">Trade-offs</p>
+        <p class="byline">written by humans</p>
         <h2 class="essay-title">The trade-offs,<br />out loud.</h2>
       </div>
       <div class="essay">
         <section id="experiment" class="reveal">
           <h3>An experiment, and one person built it</h3>
-          <p>Enliner is a working prototype, not a finished product from a large company. One person designed and built it, mostly by directing AI. It runs, and it is measured on real hardware, and there are gaps and rough edges that a bigger team and more time would smooth out. I would rather say that plainly than dress it up. What follows are the trade-offs it makes on purpose, and why I think they are the right ones.</p>
+          <p>Enliner is a working prototype, not a finished product from a large company. One person designed and built it, mostly by directing AI. It runs, and it is measured on real hardware, and there are gaps and rough edges that a bigger team and more time would smooth out. If you buy Enliner, it is a signal to me that you believe in the same things, and it lets me put more time into it alongside other projects.</p>
         </section>
 
         <section id="compute" class="reveal">
           <h3>On-device models have real limits</h3>
-          <p>The AI in Enliner runs on the machine in front of you, and that comes with a ceiling. When you ask a big cloud service to transcribe a call or summarize a document, it reaches for racks of GPUs with terabytes of memory. Enliner does the same job on one computer, on roughly an order of magnitude less compute. For summarizing your own calls and notes, the on-device models are good, and they keep getting better. For the very hardest tasks, the frontier cloud models are still ahead. That gap is real. Pretending otherwise would be the dishonest part.</p>
+          <p>When you ask a big cloud service to transcribe a call or summarize a document, it reaches for racks of GPUs with terabytes of memory. Enliner does the same job on one computer, on roughly one to two orders of magnitude less compute. For summarizing your own calls and notes, the on-device models are good, and they keep getting better. For the very hardest tasks, the frontier cloud models are still ahead. That gap is real. It will narrow as we keep investing in open model development.</p>
         </section>
 
         <section id="trade" class="reveal">
-          <h3>The trade is worth it, and it is yours to make</h3>
-          <p>Winning every benchmark was never the goal. For the things you do every day, keeping your thinking on your own machine is worth more than the last increment of quality. When a job genuinely needs the cloud, use the cloud, on purpose. The difference is that you are making the trade deliberately, rather than having it made for you as the default.</p>
+          <h3>The trade is worth it, and it is ours to make</h3>
+          <p>Winning every benchmark was never the goal. For the things we do every day, keeping our thinking on our own machine is worth more than the last increment of quality. When a job genuinely needs the cloud, use the cloud, on purpose (and having your vault in Markdown makes that easy). The difference is that we make the choice deliberately, rather than having it made for us by someone else.</p>
         </section>
 
         <section id="split" class="reveal">
           <h3>Some work belongs in the cloud. Most of this does not.</h3>
-          <p>There is real cloud-scale work. Synthesizing a whole vault against a model that needs terabytes of memory and a million-token window is a data-center job, and Enliner will reach for the cloud when you ask it to. Transcribing a phone call is not that. Taking a voice memo is not that. Writing and organizing your notes is not that. A surprising amount of what we have been taught to rent runs perfectly well on hardware we already own.</p>
+          <p>There is real cloud-scale work. Synthesizing a whole vault against a model that needs terabytes of memory and a million-token window is a data-center job, and Enliner will not stop you from using cloud tools for it. Transcribing a phone call is not that. Taking a voice memo is not that. Writing and organizing your notes is not that. A surprising amount of what we have been taught to rent runs perfectly well on hardware we already own.</p>
         </section>
 
         <section id="built-with-ai" class="reveal">
-          <h3>Built with AI, and not shy about it</h3>
-          <p>Enliner's code was written largely by describing what I wanted to AI agents and supervising the work. That is the same shift the whole project is about. The tools got cheap enough that one person can build a real, native app, so I used them to build one that then runs entirely on your machine. Using good tools to make something you can own is exactly the point.</p>
-          <p>I am not against the cloud, and I pay for the best models myself, because for some work they earn it. The argument here is narrower and more practical than a rejection of any of it.</p>
-        </section>
-
-        <section id="subscriptions" class="reveal">
-          <h3>Subscriptions fit services, not personal software</h3>
-          <p>A subscription makes sense for a continuous service that runs for you around the clock. It fits personal software badly. Recording a call, taking a voice memo, writing in an outline: these are things your own computer can do, and a tool that does them should not quietly bill you every month for the privilege. Renting is the right shape for some things. It became the default for almost everything, and that is the part worth pushing back on.</p>
-        </section>
-
-        <section id="future" class="reveal">
-          <h3>A hint at a different future</h3>
-          <p>Part of why Enliner exists is to argue that the future could go another way, and to make that argument as something you can actually run. Treat it as a small piece of design fiction: software from a future where personal computing is personal again. Where the internet is a transport layer and the apps on your machine are yours. Where a device does not have to be online and streaming to be useful, because a great deal of the world does not live with constant, uninterrupted connectivity, and software should meet people where they are.</p>
-          <p>That is the future worth building toward, and Enliner is one attempt to show what it feels like in the hand.</p>
+          <h3>Built with AI, and that's the point</h3>
+          <p>Enliner's code was written largely by describing what I wanted to AI agents and supervising the work, and making all the decisions. That is the same shift the whole project is about. The tools got cheap enough that one person can build a real, native app, so I used them to build one that then runs entirely on your machine. Using good tools to make something you can own is exactly the point.</p>
+          <p>I am not against the cloud, and I pay for the best models myself to enable experiments like Enliner, because for some work they earn it. The argument here is narrower and more practical than a rejection of any of it. It is the worst it will ever be, and everything gets better from here: better frontier tools we can use to build our own everyday tools, and to compute for ourselves.</p>
         </section>
 
         <section id="close" class="reveal">
-          <h3>The decision stays yours</h3>
-          <p>None of this is a rejection of the tools we have. It is a set of deliberate choices about where your work lives and who it answers to. The limits are real, the trade-offs are on the table, and the call is yours to make.</p>
           <p class="essay-cta"><a class="btn btn-solid" href="philosophy">Read the philosophy →</a> <a class="btn btn-ghost" href="/#access">Get early access</a></p>
         </section>
       </div>

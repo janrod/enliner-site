@@ -66,7 +66,6 @@
       <a href="principles">Principles</a>
       <a href="tradeoffs">Trade-offs</a>
       <a href="tech">Tech</a>
-      <a href="/#price">Price</a>
       <a class="nav-cta" href="/#access">Early access</a>
     </nav>
   </header>
@@ -77,61 +76,22 @@
     <section class="essay-wrap" id="essay">
       <div class="essay-intro reveal">
         <p class="section-kicker">The philosophy behind Enliner</p>
+        <p class="byline">written by humans</p>
         <h2 class="essay-title">Computing should happen<br />on hardware you own.</h2>
       </div>
       <div class="essay">
-        <section id="buildout" class="reveal">
-          <h3>The quiet fight over where computing happens</h3>
-          <p>There is an enormous amount of money going into data centers right now, and it is worth asking what all of it is actually for. The pitch underneath it is that real computation is too heavy to run where you are, so it belongs in the cloud instead, on silicon you rent by the minute and reach across the network. Each year a little more of what used to run on your own machine gets pulled onto someone else's, and you pay to keep reaching it.</p>
-          <p>I think this is the fight that decides the next decade of personal computing, and most people will never be asked which side they are on. The default is being chosen for them: computation moves off the machines we own and into rented capacity we do not, metered and logged, and switched off the day the payments stop.</p>
-        </section>
-
-        <section id="capable" class="reveal">
-          <h3>You already own a computer that can do this</h3>
-          <p>The strange part is how capable the machine on your desk already is. A Mac with Apple Silicon can transcribe your calls, run a real language model, and search across everything you have ever written, all on its own, without asking anyone for permission first. The push to meter compute is not really a story about what your hardware can do. It is a story about where the value ends up. Run the work in the cloud and the value accrues to whoever owns the cloud. Run it on the machine you already paid for and it stays with you.</p>
-        </section>
-
-        <section id="cheap" class="reveal">
-          <h3>Code got cheap</h3>
-          <p>For most of software's history the expensive part was the code itself. Building something real took skilled engineers, months of their time, and a great deal of money spent before there was anything to sell, which is roughly why software companies are shaped the way they are. They raised the money, hired the people, and then had to earn it all back from you.</p>
-          <p>That cost is collapsing. I built Enliner largely by describing what I wanted to AI agents and supervising the work, and what came out the other side is a real native Mac app, with a text engine written from scratch and your notes kept as plain Markdown on disk. It opens a ten-thousand-block vault in under a second, answers a keystroke in a few milliseconds, and carries more than seven thousand automated tests. Measured in the old currency of engineering hours, it cost almost nothing to make.</p>
-          <p>I lead with this because it is the whole opening. Once code gets cheap enough that one person can build a serious tool, we stop having to accept the tools we are handed.</p>
-        </section>
-
-        <section id="deal" class="reveal">
-          <h3>What the metered deal actually costs</h3>
-          <p>Most AI software asks for the same arrangement. Hand over your notes, your calls, and your thinking, and it will be made smart for you in return, running on servers you never have to think about. It reads like a fair trade, and for a while it genuinely was one. Someone had to pay for the machines and the people, and the subscription covered them.</p>
-          <p>Those costs are falling out from under the deal while the deal stays exactly the same. The compute can run on the Mac you already own, and the code is cheap to write. What is left is a monthly fee to reach your own thinking, sitting on hardware you do not control, kept under a retention policy you did not write and used to train the next model. For a business the bill runs well past the invoice, into the liability of your conversations living in someone else's system and the options you quietly give up once moving your data somewhere else has been made hard on purpose.</p>
-        </section>
-
-        <section id="tool" class="reveal">
-          <h3>Use AI on your own machine</h3>
-          <p>None of this is an argument against AI. I use it every day, and Enliner is built on it. It is a genuinely good tool, and the point is to keep it that way: something you aim at your work, whose results you keep, running somewhere you control. The catch is that once a model can read everything you give it and hand it back, the thinking you handed over stops being only yours. Running it on your own machine is how you get the help without giving that part away. There is something fitting about building a little independence out of the very technology being used to erode it, and that is the move Enliner makes.</p>
-        </section>
-
-        <section id="design" class="reveal">
-          <h3>Independence you can actually choose</h3>
-          <p>Independence here does not mean running your own servers. Almost nobody wants that, and I am not asking anyone to. It means choosing where you lean on someone else on purpose, and keeping the door open behind you. Your knowledge lives in plain files you can read without the app. The parts that reach for the cloud stay swappable, so you can carry them elsewhere. You lean on the cloud where it earns its place and keep the rest close.</p>
-          <p>Dependence you pick deliberately, and can reverse, is fine. The kind that arrives as the only option, with no way back out, is the kind that costs you later. Every one of those is a decision somebody makes for you inside the software, whether you see it or not. Enliner makes them in your favor, and it makes them in the open.</p>
-        </section>
-
-        <section id="editor" class="reveal">
-          <h3>The thinking happens in a text editor</h3>
-          <p>Writing is how you think. You work an idea out by getting it into words, moving the pieces around, and seeing what still stands the next morning. A plain document you can outline, reorder, and link is the oldest tool we have for that, and nothing since has really improved on it. Notes are not a record of the thinking. They are where it happens.</p>
-          <p>So Enliner is a text editor first, and the rest hangs off that. Pages, blocks, and links you shape by hand, with the AI sitting at the edge as one more tool you reach for when it earns its place. The words on the page are the point. The model helps you keep up with them and find your way back, and then it gets out of the way.</p>
+        <section id="fight" class="reveal">
+          <h3>The quiet fight over the future of personal computing</h3>
+          <p>There is an enormous amount of money going into data centers right now, in a push to cripple personal computing and co-opt the individual productivity of humans at large. The pitch underneath it is that real computation is too heavy to run on our own machines, so it belongs in the cloud instead, on silicon we rent by the minute and reach across the network.</p>
+          <p>Each year a little more of what used to run on our own machines gets pulled into the cloud, and we are sold access to it with no option to meaningfully opt out (go try to quit Notion and dump everything into an editable, coherent data store you can actually work with).</p>
+          <p>The nuance to keep in mind is that this is an agenda, not a necessity, and not a predetermination of the technology. It is a choice that someone somewhere makes.</p>
+          <p>So we have a choice, and I think we should take it: we can co-opt the tools and use them to build our own future. Enliner is built by one person. Imagine if everyone built their own tool like that, for something they love to do and care about.</p>
         </section>
 
         <section id="artifact" class="reveal">
           <h3>Enliner is the argument, built</h3>
-          <p>Enliner is what all of this looks like once it stops being talk. It keeps your notes, calls, and voice memos on your own Mac and turns them into something you can think inside: pages, links, and a graph that connect what you know. The AI runs locally, on models that live on the machine. Nothing is uploaded and nothing trains a model, and you can prove that to yourself by switching on airplane mode and watching the whole thing keep working. You buy it once, it keeps running whether or not you keep paying, and your work stays in plain Markdown you will still be able to open in ten years.</p>
-          <p>I am not going to tell you it is perfect. The on-device models are smaller than the largest ones in the cloud, and for the hardest tasks the cloud is still ahead. I am betting that keeping your thinking on your own machine is worth more than the last increment of quality, and I would rather say that plainly than pretend it away.</p>
-          <p>What Enliner is, honestly, is a stake in the ground. One working piece of software that does the things people reach for big companies to do, and does them standing on its own, on hardware you own. A small proof that the other way is possible, and already here.</p>
-        </section>
-
-        <section id="close" class="reveal">
-          <h3>Somebody has to pick it up</h3>
-          <p>A future where computing stays personal will not arrive on its own. Someone has to build the tools that make it real, and then other people have to want them enough to use them. I decided to build one of the tools. If any of this lands with you, that is the point: making things is cheap enough now that you can build your own corner of it instead of accepting the one that was designed for you.</p>
-          <p>Enliner is built in the open and not on sale yet. Follow along, or ask for early access.</p>
+          <p>The AI parts of Enliner will be rough for a while: we need more RAM in our computers, which now sadly goes to cloud customers. There is a light at the end of the tunnel, though. The bubble will pop and the landscape will shift. What it shifts into is what we need to be thinking about, and what kind of tools we want in our tool belt when it happens. Robust. Resilient. Working both offline and online. Computing for you, on your own hardware. Enliner is a stake in the ground and a proof that something like that can be done.</p>
+          <p>Enliner is a piece of functional software, and also an artifact and a statement: an example of a future we may choose for ourselves. It is one step toward something else, and should be treated as such. It is not perfect. It is partially built by machines. It probably contains bugs. Yet I think it deserves to exist. If you buy it, please consider that you are buying into the story that is unfolding right now.</p>
           <p class="essay-cta"><a class="btn btn-solid" href="/#access">Get early access</a></p>
         </section>
       </div>

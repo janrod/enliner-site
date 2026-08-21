@@ -93,10 +93,10 @@
           form.reset();
           setStatus("You're on the list. Talk soon.", 'ok');
         } else {
-          setStatus('Something went wrong. Try again, or email hello@enliner.net.', 'err');
+          setStatus('Something went wrong. Try again, or email enliner@enclave.jp.', 'err');
         }
       }).catch(function () {
-        setStatus('Network hiccup. Try again, or email hello@enliner.net.', 'err');
+        setStatus('Network hiccup. Try again, or email enliner@enclave.jp.', 'err');
       }).finally(function () {
         button.disabled = false;
       });
